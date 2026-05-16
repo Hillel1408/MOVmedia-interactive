@@ -85,3 +85,7 @@ ul,
 ol {
   list-style: none;
 }
+
+.container {
+  @apply max-w-[1920px] mx-auto;
+}

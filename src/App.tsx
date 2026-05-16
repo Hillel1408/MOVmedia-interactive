@@ -1,7 +1,12 @@
 import "./App.css";
+import { Intro } from "./components";
 
 function App() {
-  return <div></div>;
+  return (
+    <>
+      <Intro />
+    </>
+  );
 }
 
 export default App;
