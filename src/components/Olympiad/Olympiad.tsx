@@ -20,6 +20,18 @@ const Olympiad = observer(function Olympiad() {
   //     return () => clearTimeout(timer);
   //   }, []);
 
+  useEffect(() => {
+    if (step === 3) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [step]);
+
   return (
     <div className="relative">
       <Map
@@ -47,17 +59,17 @@ const Olympiad = observer(function Olympiad() {
       )}
 
       {step === 3 && (
-        <div className="absolute left-0 right-0 top-0 bottom-0 py-14 pr-14 pl-97.75">
-          <div className="absolute bottom-0 left-0">
+        <div className="fixed overflow-y-auto left-0 right-0 top-0 bottom-0 grid grid-cols-[391px_1fr] items-end">
+          <div className="relative">
             <img src={schoolboy} alt="Школьник" />
-            <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 absolute bg-[#32292280] rounded-4xl backdrop-blur-[60px] bottom-142.5 left-6">
+            <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-75 left-7.75">
               Победители нашей Олимпиады по финансовой безопасности получают
               баллы к ЕГЭ и шанс поступить в крутые вузы. Хочешь проверить, на
               что способен?
             </div>
           </div>
 
-          <div className="p-10 border-[6px] border-[#FFE9C0] rounded-4xl backdrop-blur-[60px] bg-[linear-gradient(180deg,rgba(255,247,241,0.6)_0%,rgba(255,237,224,0.6)_100%)]">
+          <div className="p-10 border-[6px] border-[#FFE9C0] rounded-4xl bg-[linear-gradient(180deg,rgba(255,247,241,0.6)_0%,rgba(255,237,224,0.6)_100%)] my-14">
             <h1 className="font-semibold text-[40px] leading-12 text-[#0F0F33] mb-6">
               Олимпиадный центр
             </h1>

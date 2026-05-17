@@ -80,7 +80,7 @@ export default function CardSequence({ items, correctOrder }: Props) {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="bg-[#E9DACB] p-4 rounded-3xl flex flex-col gap-2 min-h-87"
+              className="bg-[#E9DACB] p-4 rounded-3xl flex flex-col gap-2 h-87"
             >
               {pool.map((item, index) => (
                 <Draggable key={item.id} draggableId={item.id} index={index}>
@@ -114,7 +114,7 @@ export default function CardSequence({ items, correctOrder }: Props) {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="bg-[#E9DACB] p-4 rounded-3xl flex flex-col gap-2"
+              className="bg-[#E9DACB] p-4 rounded-3xl flex flex-col gap-2 max-h-87"
             >
               {slots.map((item, index) => {
                 const isCorrect = item && correctOrder[index] === item.id;
@@ -123,7 +123,7 @@ export default function CardSequence({ items, correctOrder }: Props) {
                 return (
                   <div
                     key={index}
-                    className={`h-18.25 rounded-2xl border-2 border-dotted flex items-center justify-center transition-colors duration-300
+                    className={`min-h-18.25 rounded-2xl border-2 border-dotted flex items-center justify-center transition-colors duration-300
                       ${
                         isCorrect
                           ? "border-green-500 bg-green-50"
