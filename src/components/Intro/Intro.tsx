@@ -1,22 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+
 import schoolboy from "@/assets/images/schoolboy.png";
 import student from "@/assets/images/student.png";
 import expert from "@/assets/images/expert.png";
 import teacher from "@/assets/images/teacher.png";
+import { rootStore } from "../../stores/rootStore";
 
-export default function Intro() {
-  const [step, setStep] = useState(4);
+const roles = [
+  {
+    key: "schoolboy",
+    title: "Школьник",
+    name: "Артём",
+    image: schoolboy,
+  },
+  {
+    key: "student",
+    title: "Студент",
+    name: "Диана",
+    image: student,
+  },
+  {
+    key: "expert",
+    title: "Эксперт",
+    name: "Екатерина",
+    image: expert,
+  },
+  {
+    key: "teacher",
+    title: "Представитель ВУЗа",
+    name: "Алексей",
+    image: teacher,
+  },
+];
+
+const Intro = observer(function Intro() {
+  const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    if (step >= 2 && step <= 4) {
+      const timer = setTimeout(() => {
+        setStep((prev) => prev + 1);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
 
   return (
-    <div className="h-screen bg-[url('assets/images/map.png')] bg-cover bg-center">
+    <div className="h-full min-h-screen bg-[url('assets/images/map.png')] bg-cover bg-center">
       {step === 1 && (
-        <div className="max-w-277.5 mx-auto text-center pt-22.5">
-          <h1 className="font-semibold text-[120px] leading-33 text-[#0f0f33]">
+        <div className="max-w-277.5 mx-auto text-center pt-22.5 pb-31">
+          <h1 className="font-semibold text-[120px] leading-33 text-[#0f0f33] mb-3">
             Город <br /> содружества
           </h1>
-          <p className="font-semibold text-[56px] leading-16 text-[#646872]">
+
+          <p className="font-semibold text-[56px] leading-16 text-[#646872] mb-140.5">
             Пространство для твоего развития
           </p>
+
           <button
             type="button"
             className="h-24 mx-auto flex items-center justify-center w-95.75 bg-[#EA5614] shadow-[0px_18px_40px_0px_#32292299] rounded-3xl font-semibold text-[40px] leading-12 text-white"
@@ -27,65 +69,63 @@ export default function Intro() {
         </div>
       )}
 
-      {step === 2 && (
-        <div>
-          <h1 className="font-semibold text-[80px] leading-22 text-[#0F0F33] text-center">
+      {(step === 2 || step === 3 || step === 4) && (
+        <div className="pt-18 max-w-445.5 mx-auto">
+          <h1 className="font-semibold text-[80px] leading-22 text-[#0F0F33] text-center mb-4">
             Добро пожаловать в Город содружества
           </h1>
+
+          {step === 3 && (
+            <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
+              Здесь есть всё для вашего развития и профессионального роста в
+              финансовой безопасности и смежных сферах. Мы поможем раскрыть
+              талант, построить карьеру, реализовать экспертизу, найти
+              партнёров, единомышленников и наставников.
+            </p>
+          )}
+
+          {step === 4 && (
+            <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
+              Но сперва нужно познакомиться ближе. Выберите роль
+            </p>
+          )}
         </div>
       )}
 
-      {step === 3 && (
-        <div className="max-w-445.5 mx-auto">
-          <h1 className="font-semibold text-[80px] leading-22 text-[#0F0F33] text-center">
+      {step === 5 && (
+        <div className="pt-18 pb-14">
+          <h1 className="font-semibold text-[80px] leading-22 text-[#0F0F33] text-center mb-4">
             Добро пожаловать в Город содружества
           </h1>
-          <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
-            Здесь есть всё для вашего развития и профессионального роста в
-            финансовой безопасности и смежных сферах. Мы поможем раскрыть
-            талант, построить карьеру, реализовать экспертизу, найти партнёров,
-            единомышленников и наставников. Курсы, олимпиады, живое общение,
-            нетворкинг — всё, чтобы каждый нашёл свой путь. Давайте отправимся в
-            путешествие — и узнаем, что вас ждёт
-          </p>
-        </div>
-      )}
 
-      {step === 4 && (
-        <div>
-          <h1 className="font-semibold text-[80px] leading-22 text-[#0F0F33] text-center">
-            Добро пожаловать в Город содружества
-          </h1>
-          <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
+          <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center mb-13.25">
             Но сперва нужно познакомиться ближе. Выберите роль
           </p>
-          <div className="grid grid-cols-4">
-            <div>
-              <span>Школьник</span>
-              <span>Артём</span>
-              <img src={schoolboy} alt="Школьник" />
-            </div>
 
-            <div>
-              <span>Студент</span>
-              <span>Диана</span>
-              <img src={student} alt="Студент" />
-            </div>
+          <div className="grid grid-cols-4 max-w-445.5 mx-auto gap-2">
+            {roles.map((role) => (
+              <button
+                key={role.key}
+                type="button"
+                onClick={() => rootStore.setRole(role.key)}
+                className={`overflow-hidden rounded-4xl flex flex-col items-center pt-9.5 transition hover:scale-[1.02] backdrop-blur-[60px] ${rootStore.role === role.key ? "bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%),linear-gradient(0deg,#C7470F,#C7470F)]" : "bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%)]"}`}
+              >
+                <span className="font-semibold text-[36px] leading-11 text-[#FFFFFF80]">
+                  {role.title}
+                </span>
 
-            <div>
-              <span>Эксперт</span>
-              <span>Екатерина</span>
-              <img src={expert} alt="Эксперт" />
-            </div>
+                <span className="font-bold text-[56px] leading-16 text-white flex-auto">
+                  {role.name}
+                </span>
 
-            <div>
-              <span>Представитель ВУЗа</span>
-              <span>Алексей</span>
-              <img src={teacher} alt="Представитель ВУЗа" />
-            </div>
+                <img src={role.image} alt={role.title} />
+              </button>
+            ))}
           </div>
         </div>
       )}
     </div>
   );
-}
+});
+
+export default Intro;
