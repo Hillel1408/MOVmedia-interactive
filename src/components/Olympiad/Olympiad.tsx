@@ -8,6 +8,7 @@ import hat from "@/assets/icons/hat.svg";
 import star from "@/assets/icons/star.svg";
 import clipboardList from "@/assets/icons/clipboardList.svg";
 import university from "@/assets/icons/university.svg";
+import Modal from "../Modal/Modal";
 
 const Olympiad = observer(function Olympiad() {
   const [step, setStep] = useState(3);
@@ -19,18 +20,6 @@ const Olympiad = observer(function Olympiad() {
 
   //     return () => clearTimeout(timer);
   //   }, []);
-
-  useEffect(() => {
-    if (step === 3) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [step]);
 
   return (
     <div className="relative">
@@ -58,57 +47,54 @@ const Olympiad = observer(function Olympiad() {
         </div>
       )}
 
-      {step === 3 && (
-        <div className="fixed overflow-y-auto left-0 right-0 top-0 bottom-0 grid grid-cols-[391px_1fr] items-end">
-          <div className="relative">
-            <img src={schoolboy} alt="Школьник" />
-            <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-75 left-7.75">
-              Победители нашей Олимпиады по финансовой безопасности получают
-              баллы к ЕГЭ и шанс поступить в крутые вузы. Хочешь проверить, на
-              что способен?
-            </div>
-          </div>
-
-          <div className="p-10 border-[6px] border-[#FFE9C0] rounded-4xl bg-[linear-gradient(180deg,rgba(255,247,241,0.6)_0%,rgba(255,237,224,0.6)_100%)] my-14">
-            <h1 className="font-semibold text-[40px] leading-12 text-[#0F0F33] mb-6">
-              Олимпиадный центр
-            </h1>
-
-            <div className="bg-[url('assets/images/olympicCenter.png')] bg-cover bg-center min-h-204.5 rounded-3xl px-6 py-7 flex justify-end">
-              <CardSequence
-                correctOrder={["clipboardList", "star", "hat", "university"]}
-                items={[
-                  {
-                    id: "hat",
-                    icon: hat,
-                    iconBg: "#DDEDF9",
-                    title: "Записаться на курс",
-                  },
-                  {
-                    id: "clipboardList",
-                    icon: clipboardList,
-                    iconBg: "#E0E6FB",
-                    title: "Пройти тест",
-                  },
-                  {
-                    id: "university",
-                    icon: university,
-                    iconBg: "#F46248",
-                    title:
-                      "Получить преимущества при поступлении в лучшие ВУЗы",
-                  },
-                  {
-                    id: "star",
-                    icon: star,
-                    iconBg: "#FEEBBF",
-                    title: "Получить рекомендации",
-                  },
-                ]}
-              />
-            </div>
+      <Modal isOpen={step === 3}>
+        <div className="relative">
+          <img src={schoolboy} alt="Школьник" />
+          <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-75 left-7.75">
+            Победители нашей Олимпиады по финансовой безопасности получают баллы
+            к ЕГЭ и шанс поступить в крутые вузы. Хочешь проверить, на что
+            способен?
           </div>
         </div>
-      )}
+
+        <div className="p-10 border-[6px] border-[#FFE9C0] rounded-4xl bg-[linear-gradient(180deg,rgba(255,247,241,0.6)_0%,rgba(255,237,224,0.6)_100%)] my-14 mr-14">
+          <h1 className="font-semibold text-[40px] leading-12 text-[#0F0F33] mb-6">
+            Олимпиадный центр
+          </h1>
+
+          <div className="bg-[url('assets/images/olympicCenter.png')] bg-cover bg-center min-h-204.5 rounded-3xl px-6 py-7 flex justify-end">
+            <CardSequence
+              correctOrder={["clipboardList", "star", "hat", "university"]}
+              items={[
+                {
+                  id: "hat",
+                  icon: hat,
+                  iconBg: "#DDEDF9",
+                  title: "Записаться на курс",
+                },
+                {
+                  id: "clipboardList",
+                  icon: clipboardList,
+                  iconBg: "#E0E6FB",
+                  title: "Пройти тест",
+                },
+                {
+                  id: "university",
+                  icon: university,
+                  iconBg: "#F46248",
+                  title: "Получить преимущества при поступлении в лучшие ВУЗы",
+                },
+                {
+                  id: "star",
+                  icon: star,
+                  iconBg: "#FEEBBF",
+                  title: "Получить рекомендации",
+                },
+              ]}
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 });
