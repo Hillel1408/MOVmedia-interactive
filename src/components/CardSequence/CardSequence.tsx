@@ -91,6 +91,7 @@ export default function CardSequence({
     if (slots.every(Boolean) && isCompletedCorrectly(slots)) {
       onSuccess?.();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slots, correctOrder, onSuccess]);
 
   return (
