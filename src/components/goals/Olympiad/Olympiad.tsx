@@ -8,7 +8,7 @@ import {
   ActionButton,
   InfoCard,
   QuizQuestion,
-} from "../../components";
+} from "../..";
 
 import schoolboy3 from "@/assets/images/schoolboy3.png";
 import schoolboy from "@/assets/images/schoolboy.png";
