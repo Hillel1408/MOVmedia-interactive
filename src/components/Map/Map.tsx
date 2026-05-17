@@ -24,7 +24,7 @@ const Map = observer(function Map({
       {showOlympicCenter && (
         <ActionButton
           onClick={onOlympicCenterClick}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-10 left-1/2 -translate-x-1/2"
         >
           Олимпиадный центр
         </ActionButton>
@@ -33,7 +33,7 @@ const Map = observer(function Map({
       {showAcademy && (
         <ActionButton
           onClick={onAcademyClick}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-10 left-1/2 -translate-x-1/2"
         >
           Академия
         </ActionButton>

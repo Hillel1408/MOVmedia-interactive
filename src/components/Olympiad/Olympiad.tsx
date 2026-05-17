@@ -12,18 +12,20 @@ import Modal from "../Modal/Modal";
 import ActionButton from "../ActionButton/ActionButton";
 import InfoCard from "../InfoCard/InfoCard";
 import olympicCenter from "@/assets/images/olympicCenter.png";
+import аcademy from "@/assets/images/аcademy.png";
+import QuizQuestion from "../QuizQuestion/QuizQuestion";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
 
-  //   useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //       setStep(2);
-  //     }, 3000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStep(2);
+    }, 3000);
 
-  //     return () => clearTimeout(timer);
-  //   }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="relative">
@@ -63,7 +65,11 @@ const Olympiad = observer(function Olympiad() {
           </div>
         </div>
 
-        <InfoCard title="Олимпиадный центр" backgroundImage={olympicCenter}>
+        <InfoCard
+          title="Олимпиадный центр"
+          backgroundImage={olympicCenter}
+          className="grid-cols-[1fr_549px]"
+        >
           <div>
             {isSequenceCompleted && (
               <ActionButton onClick={() => setStep(4)} className="w-full">
@@ -123,6 +129,15 @@ const Olympiad = observer(function Olympiad() {
             способен?
           </div>
         </div>
+
+        <InfoCard
+          title="Академия"
+          backgroundImage={аcademy}
+          className="grid-cols-[1fr_492px]"
+        >
+          <div></div>
+          <QuizQuestion />
+        </InfoCard>
       </Modal>
     </div>
   );

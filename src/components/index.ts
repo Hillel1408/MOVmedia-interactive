@@ -6,6 +6,7 @@ import CardSequence from "./CardSequence/CardSequence";
 import Modal from "./Modal/Modal";
 import ActionButton from "./ActionButton/ActionButton";
 import InfoCard from "./InfoCard/InfoCard";
+import QuizQuestion from "./QuizQuestion/QuizQuestion";
 
 export {
   Intro,
@@ -16,4 +17,5 @@ export {
   Modal,
   ActionButton,
   InfoCard,
+  QuizQuestion,
 };
