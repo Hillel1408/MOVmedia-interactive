@@ -19,7 +19,7 @@ const Map = observer(function Map({
 }: MapProps) {
   return (
     <div className="relative">
-      <img src={map} alt="Карты" />
+      <img src={map} alt="Карты" className="w-full object-cover h-full" />
 
       {showOlympicCenter && (
         <ActionButton

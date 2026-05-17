@@ -21,8 +21,10 @@ export default function Modal({ isOpen, children }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed overflow-y-auto left-0 right-0 top-0 bottom-0 grid grid-cols-[391px_1fr] items-end">
-      {children}
+    <div className="fixed inset-0 overflow-x-auto overflow-y-auto">
+      <div className="grid min-w-[1920px] grid-cols-[391px_1fr] items-end my-auto h-full">
+        {children}
+      </div>
     </div>
   );
 }
