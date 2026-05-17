@@ -3,6 +3,7 @@ import Map from "../Map/Map";
 import { useEffect, useState } from "react";
 import schoolboy2 from "@/assets/images/schoolboy2.png";
 import classNames from "classnames";
+import { rootStore } from "../../stores/rootStore";
 
 const Schoolboy = observer(function Schoolboy() {
   const [step, setStep] = useState(1);
@@ -40,18 +41,21 @@ const Schoolboy = observer(function Schoolboy() {
               <button
                 type="button"
                 className="bg-[#EA5614] h-22 rounded-3xl font-semibold text-[32px] leading-10 text-white"
+                onClick={() => rootStore.setGoal("olympiad")}
               >
                 Подготовиться к Олимпиаде
               </button>
               <button
                 type="button"
                 className="bg-[#EA5614] h-22 rounded-3xl font-semibold text-[32px] leading-10 text-white"
+                onClick={() => rootStore.setGoal("security")}
               >
                 Узнать о финансовой безопасности
               </button>
               <button
                 type="button"
                 className="bg-[#EA5614] h-32 rounded-3xl font-semibold text-[32px] leading-10 text-white"
+                onClick={() => rootStore.setGoal("movement")}
               >
                 Познакомиться с Международным движением по финансовой
                 безопасности
