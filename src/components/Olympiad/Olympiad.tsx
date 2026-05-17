@@ -1,19 +1,23 @@
-import { observer } from "mobx-react-lite";
-import Map from "../Map/Map";
-import schoolboy3 from "@/assets/images/schoolboy3.png";
 import { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+
+import {
+  Map,
+  CardSequence,
+  Modal,
+  ActionButton,
+  InfoCard,
+  QuizQuestion,
+} from "../../components";
+
+import schoolboy3 from "@/assets/images/schoolboy3.png";
 import schoolboy from "@/assets/images/schoolboy.png";
-import CardSequence from "../CardSequence/CardSequence";
 import hat from "@/assets/icons/hat.svg";
 import star from "@/assets/icons/star.svg";
 import clipboardList from "@/assets/icons/clipboardList.svg";
 import university from "@/assets/icons/university.svg";
-import Modal from "../Modal/Modal";
-import ActionButton from "../ActionButton/ActionButton";
-import InfoCard from "../InfoCard/InfoCard";
 import olympicCenter from "@/assets/images/olympicCenter.png";
 import аcademy from "@/assets/images/аcademy.png";
-import QuizQuestion from "../QuizQuestion/QuizQuestion";
 
 const Olympiad = observer(function Olympiad() {
   const [step, setStep] = useState(1);

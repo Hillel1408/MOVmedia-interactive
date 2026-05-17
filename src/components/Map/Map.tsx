@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
+
+import { ActionButton } from "../../components";
+
 import map from "@/assets/images/map.png";
-import ActionButton from "../ActionButton/ActionButton";
 
 interface MapProps {
   showOlympicCenter?: boolean;

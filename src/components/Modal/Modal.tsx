@@ -22,7 +22,7 @@ export default function Modal({ isOpen, children }: ModalProps) {
 
   return (
     <div className="fixed inset-0 overflow-x-auto overflow-y-auto">
-      <div className="grid min-w-[1920px] grid-cols-[391px_1fr] items-end my-auto h-full">
+      <div className="grid min-w-480 grid-cols-[391px_1fr] items-end my-auto h-full">
         {children}
       </div>
     </div>

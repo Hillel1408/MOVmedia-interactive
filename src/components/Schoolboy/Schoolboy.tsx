@@ -1,10 +1,12 @@
-import { observer } from "mobx-react-lite";
-import Map from "../Map/Map";
 import { useEffect, useState } from "react";
-import schoolboy2 from "@/assets/images/schoolboy2.png";
 import classNames from "classnames";
+import { observer } from "mobx-react-lite";
+
+import { Map, ActionButton } from "../../components";
+
 import { rootStore } from "../../stores/rootStore";
-import ActionButton from "../ActionButton/ActionButton";
+
+import schoolboy2 from "@/assets/images/schoolboy2.png";
 
 const Schoolboy = observer(function Schoolboy() {
   const [step, setStep] = useState(1);

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import type { DropResult } from "@hello-pangea/dnd";
+import {
+  type DropResult,
+  DragDropContext,
+  Droppable,
+  Draggable,
+} from "@hello-pangea/dnd";
 
 type Item = {
   id: string;
