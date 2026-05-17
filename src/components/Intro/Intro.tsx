@@ -56,7 +56,7 @@ const Intro = observer(function Intro() {
   }, [step]);
 
   return (
-    <div className="h-full min-h-screen bg-[url('assets/images/map.png')] bg-cover bg-center">
+    <div className="h-full min-h-screen bg-[url('assets/images/introMap.png')] bg-cover bg-center">
       {step === 1 && (
         <div className="max-w-277.5 mx-auto text-center pt-22.5 pb-31">
           <h1 className="font-semibold text-[120px] leading-33 text-[#0f0f33] mb-3">
