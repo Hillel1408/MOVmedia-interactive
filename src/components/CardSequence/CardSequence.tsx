@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import type { DropResult } from "@hello-pangea/dnd";
 
@@ -12,14 +12,26 @@ type Item = {
 type Props = {
   items: Item[];
   correctOrder: string[];
+  onSuccess?: () => void;
 };
 
-export default function CardSequence({ items, correctOrder }: Props) {
+export default function CardSequence({
+  items,
+  correctOrder,
+  onSuccess,
+}: Props) {
   const [pool, setPool] = useState<Item[]>(() => items);
   const [slots, setSlots] = useState<(Item | null)[]>(() =>
     Array(correctOrder.length).fill(null),
   );
   const [wrong, setWrong] = useState<Record<string, boolean>>({});
+
+  const isCompletedCorrectly = (slots: (Item | null)[]) => {
+    return slots.every((slot, index) => {
+      if (!slot) return false;
+      return slot.id === correctOrder[index];
+    });
+  };
 
   const handleDragEnd = (result: DropResult) => {
     const { source, destination } = result;
@@ -32,7 +44,6 @@ export default function CardSequence({ items, correctOrder }: Props) {
     if (!draggedItem) return;
 
     const firstEmptySlotIndex = slots.findIndex((slot) => slot === null);
-
     if (firstEmptySlotIndex === -1) return;
 
     const isCorrectPlacement =
@@ -71,6 +82,12 @@ export default function CardSequence({ items, correctOrder }: Props) {
       }, 3000);
     }
   };
+
+  useEffect(() => {
+    if (slots.every(Boolean) && isCompletedCorrectly(slots)) {
+      onSuccess?.();
+    }
+  }, [slots, correctOrder, onSuccess]);
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>

@@ -1,28 +1,42 @@
 import { observer } from "mobx-react-lite";
 import map from "@/assets/images/map.png";
-import olympicCenterFrame from "@/assets/images/olympicCenterFrame.png";
+import ActionButton from "../ActionButton/ActionButton";
 
 interface MapProps {
   showOlympicCenter?: boolean;
   onOlympicCenterClick?: () => void;
+
+  showAcademy?: boolean;
+  onAcademyClick?: () => void;
 }
 
 const Map = observer(function Map({
   showOlympicCenter = false,
   onOlympicCenterClick,
+
+  showAcademy = false,
+  onAcademyClick,
 }: MapProps) {
   return (
     <div className="relative">
       <img src={map} alt="Карты" />
 
       {showOlympicCenter && (
-        <button
-          type="button"
+        <ActionButton
           onClick={onOlympicCenterClick}
-          className="absolute top-94.25 left-0"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          <img src={olympicCenterFrame} alt="Олимпиадный центр" />
-        </button>
+          Олимпиадный центр
+        </ActionButton>
+      )}
+
+      {showAcademy && (
+        <ActionButton
+          onClick={onAcademyClick}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
+          Академия
+        </ActionButton>
       )}
     </div>
   );

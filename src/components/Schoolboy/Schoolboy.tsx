@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import schoolboy2 from "@/assets/images/schoolboy2.png";
 import classNames from "classnames";
 import { rootStore } from "../../stores/rootStore";
+import ActionButton from "../ActionButton/ActionButton";
 
 const Schoolboy = observer(function Schoolboy() {
   const [step, setStep] = useState(1);
@@ -38,28 +39,21 @@ const Schoolboy = observer(function Schoolboy() {
 
           {step === 2 && (
             <div className="flex flex-col gap-4.5">
-              <button
-                type="button"
-                className="bg-[#EA5614] h-22 rounded-3xl font-semibold text-[32px] leading-10 text-white"
-                onClick={() => rootStore.setGoal("olympiad")}
-              >
+              <ActionButton onClick={() => rootStore.setGoal("olympiad")}>
                 Подготовиться к Олимпиаде
-              </button>
-              <button
-                type="button"
-                className="bg-[#EA5614] h-22 rounded-3xl font-semibold text-[32px] leading-10 text-white"
-                onClick={() => rootStore.setGoal("security")}
-              >
+              </ActionButton>
+
+              <ActionButton onClick={() => rootStore.setGoal("security")}>
                 Узнать о финансовой безопасности
-              </button>
-              <button
-                type="button"
-                className="bg-[#EA5614] h-32 rounded-3xl font-semibold text-[32px] leading-10 text-white"
+              </ActionButton>
+
+              <ActionButton
                 onClick={() => rootStore.setGoal("movement")}
+                className="bg-[#EA5614] h-32 rounded-3xl font-semibold text-[32px] leading-10 text-white"
               >
                 Познакомиться с Международным движением по финансовой
                 безопасности
-              </button>
+              </ActionButton>
             </div>
           )}
         </div>
