@@ -37,6 +37,14 @@ const roles = [
 const Intro = observer(function Intro() {
   const [step, setStep] = useState(1);
 
+  const handleSelectRole = (role: string) => {
+    rootStore.setRole(role);
+
+    setTimeout(() => {
+      rootStore.finishIntro();
+    }, 2000);
+  };
+
   useEffect(() => {
     if (step >= 2 && step <= 4) {
       const timer = setTimeout(() => {
@@ -107,7 +115,7 @@ const Intro = observer(function Intro() {
               <button
                 key={role.key}
                 type="button"
-                onClick={() => rootStore.setRole(role.key)}
+                onClick={() => handleSelectRole(role.key)}
                 className={`overflow-hidden rounded-4xl flex flex-col items-center pt-9.5 transition hover:scale-[1.02] backdrop-blur-[60px] ${rootStore.role === role.key ? "bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%),linear-gradient(0deg,#C7470F,#C7470F)]" : "bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%)]"}`}
               >
                 <span className="font-semibold text-[36px] leading-11 text-[#FFFFFF80]">

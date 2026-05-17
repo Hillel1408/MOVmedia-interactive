@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class RootStore {
   role: string | null = null;
+  isIntroFinished = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -9,6 +10,10 @@ class RootStore {
 
   setRole(role: string) {
     this.role = role;
+  }
+
+  finishIntro() {
+    this.isIntroFinished = true;
   }
 }
 
