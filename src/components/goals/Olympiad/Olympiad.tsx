@@ -20,24 +20,30 @@ import olympicCenter from "@/assets/images/olympicCenter.png";
 import аcademy from "@/assets/images/аcademy.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setStep(2);
-    }, 3000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setStep(2);
+  //   }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <div className="relative">
       <Map
-        showOlympicCenter={step === 2}
-        onOlympicCenterClick={() => setStep(3)}
-        showAcademy={step === 4}
-        onAcademyClick={() => setStep(5)}
+        buttonText={
+          step === 2 ? "Олимпиадный центр" : step === 4 ? "Академия" : undefined
+        }
+        onButtonClick={
+          step === 2
+            ? () => setStep(3)
+            : step === 4
+              ? () => setStep(5)
+              : undefined
+        }
       />
 
       {step === 1 && (

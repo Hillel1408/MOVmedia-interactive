@@ -5,39 +5,21 @@ import { ActionButton } from "../../components";
 import map from "@/assets/images/map.png";
 
 interface MapProps {
-  showOlympicCenter?: boolean;
-  onOlympicCenterClick?: () => void;
-
-  showAcademy?: boolean;
-  onAcademyClick?: () => void;
+  buttonText?: string;
+  onButtonClick?: () => void;
 }
 
-const Map = observer(function Map({
-  showOlympicCenter = false,
-  onOlympicCenterClick,
-
-  showAcademy = false,
-  onAcademyClick,
-}: MapProps) {
+const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
   return (
     <div className="relative">
       <img src={map} alt="Карты" className="w-full object-cover h-full" />
 
-      {showOlympicCenter && (
+      {buttonText && onButtonClick && (
         <ActionButton
-          onClick={onOlympicCenterClick}
+          onClick={onButtonClick}
           className="absolute top-10 left-1/2 -translate-x-1/2"
         >
-          Олимпиадный центр
-        </ActionButton>
-      )}
-
-      {showAcademy && (
-        <ActionButton
-          onClick={onAcademyClick}
-          className="absolute top-10 left-1/2 -translate-x-1/2"
-        >
-          Академия
+          {buttonText}
         </ActionButton>
       )}
     </div>
