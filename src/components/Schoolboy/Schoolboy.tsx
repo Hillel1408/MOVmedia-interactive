@@ -14,7 +14,7 @@ const Schoolboy = observer(function Schoolboy() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setStep(2);
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);

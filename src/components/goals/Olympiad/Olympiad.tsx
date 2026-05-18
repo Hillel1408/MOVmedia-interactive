@@ -30,25 +30,25 @@ import map2 from "@/assets/images/map2.png";
 import map3 from "@/assets/images/map3.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setStep(2);
-  //   }, 3000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStep(2);
+    }, 5000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (step !== 7) return;
 
     const timer = setTimeout(() => {
       setStep(8);
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [step]);
@@ -58,7 +58,7 @@ const Olympiad = observer(function Olympiad() {
 
     const timer = setTimeout(() => {
       setStep(11);
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [isQuizWrong]);
@@ -108,7 +108,7 @@ const Olympiad = observer(function Olympiad() {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <Map
         buttonText={currentMapConfig?.buttonText}
         onButtonClick={currentMapConfig?.onClick}

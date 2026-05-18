@@ -50,7 +50,7 @@ const Intro = observer(function Intro() {
     if (step >= 2 && step <= 4) {
       const timer = setTimeout(() => {
         setStep((prev) => prev + 1);
-      }, 3000);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }

@@ -83,7 +83,7 @@ export default function CardSequence({
           }
           return updated;
         });
-      }, 3000);
+      }, 5000);
     }
   };
 

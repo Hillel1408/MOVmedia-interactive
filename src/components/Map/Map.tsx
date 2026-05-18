@@ -11,7 +11,7 @@ interface MapProps {
 
 const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
   return (
-    <div className="relative">
+    <div className="relative h-full">
       <img src={map} alt="Карты" className="w-full object-cover h-full" />
 
       {buttonText && onButtonClick && (
