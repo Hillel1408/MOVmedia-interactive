@@ -6,6 +6,8 @@ import {
   Draggable,
 } from "@hello-pangea/dnd";
 
+import tach from "@/assets/icons/tach.svg";
+
 type Item = {
   id: string;
   icon: string;
@@ -121,6 +123,8 @@ export default function CardSequence({
                       {...provided.dragHandleProps}
                       className="px-6 h-18.25 bg-white rounded-2xl flex items-center gap-4 border border-[#E4E4E4] cursor-pointer"
                     >
+                      <img src={tach} alt="Иконка" />
+
                       <div
                         className="min-w-14 h-14 rounded-xl flex items-center justify-center"
                         style={{
@@ -165,7 +169,9 @@ export default function CardSequence({
                       }`}
                   >
                     {item && (
-                      <div className="flex items-center gap-4 bg-white w-full px-6 rounded-2xl h-full">
+                      <div className="flex items-center gap-4 w-full px-6 rounded-2xl h-full">
+                        <img src={tach} alt="Иконка" />
+
                         <div
                           className="min-w-14 h-14 rounded-xl flex items-center justify-center"
                           style={{
