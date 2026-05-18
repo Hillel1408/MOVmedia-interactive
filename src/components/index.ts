@@ -7,6 +7,7 @@ import Modal from "./Modal/Modal";
 import ActionButton from "./ActionButton/ActionButton";
 import InfoCard from "./InfoCard/InfoCard";
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
+import Security from "./goals/Security/Security";
 
 export {
   Intro,
@@ -18,4 +19,5 @@ export {
   ActionButton,
   InfoCard,
   QuizQuestion,
+  Security,
 };
