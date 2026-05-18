@@ -27,7 +27,7 @@ import qrCode from "@/assets/images/qrCode.png";
 import schoolboy5 from "@/assets/images/schoolboy5.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(11);
+  const [step, setStep] = useState(5);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
@@ -329,7 +329,7 @@ const Olympiad = observer(function Olympiad() {
       )}
 
       <Modal isOpen={step === 11}>
-        <div className="grid grid-cols-[391px_548px] items-end justify-between h-full">
+        <div className="grid grid-cols-[391px_548px] items-end justify-between h-full bg-[url('assets/images/map3.png')] bg-cover bg-center">
           <div className="relative">
             <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
               Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна
