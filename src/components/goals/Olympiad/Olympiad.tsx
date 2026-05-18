@@ -23,9 +23,10 @@ import payment from "@/assets/icons/payment.svg";
 import noPayment from "@/assets/icons/noPayment.svg";
 import schoolboy4 from "@/assets/images/schoolboy4.png";
 import globalArea from "@/assets/images/globalArea.png";
+import qrCode from "@/assets/images/qrCode.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(7);
+  const [step, setStep] = useState(10);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
 
@@ -283,6 +284,25 @@ const Olympiad = observer(function Olympiad() {
           </InfoCard>
         </div>
       </Modal>
+
+      {step === 10 && (
+        <div className="absolute right-0 bottom-0">
+          <img src={schoolboy4} alt="Школьник" className="relative z-10" />
+          <div className="text-[31px] font-semibold leading-10 text-[#393C42] w-172.5 p-10 absolute rounded-4xl backdrop-blur-[60px] bottom-75.5 right-35.5 bg-[linear-gradient(180deg,rgba(255,247,241,0.80)_0%,rgba(255,237,224,0.80)_100%)]">
+            <p className="mb-10">
+              Отличная работа! Ты добрался до конца маршрута и теперь знаешь как
+              много возможностей есть на платформе «Содружество»! Переходи по
+              QR-коду и продолжай выполнять задания, чтобы получить крутой мерч!
+            </p>
+            <div className="flex gap-6 items-center">
+              <img src={qrCode} alt="QR код" width={283} height={283} />
+              <span className="text-[40px] leading-12 font-semibold text-[#393C42]">
+                Сканируй <br /> меня
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 });
