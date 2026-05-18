@@ -25,6 +25,9 @@ import schoolboy4 from "@/assets/images/schoolboy4.png";
 import globalArea from "@/assets/images/globalArea.png";
 import qrCode from "@/assets/images/qrCode.png";
 import schoolboy5 from "@/assets/images/schoolboy5.png";
+import classNames from "classnames";
+import map2 from "@/assets/images/map2.png";
+import map3 from "@/assets/images/map3.png";
 
 const Olympiad = observer(function Olympiad() {
   const [step, setStep] = useState(5);
@@ -329,7 +332,17 @@ const Olympiad = observer(function Olympiad() {
       )}
 
       <Modal isOpen={step === 11}>
-        <div className="grid grid-cols-[391px_548px] items-end justify-between h-full bg-[url('assets/images/map3.png')] bg-cover bg-center">
+        <div
+          className={classNames(
+            "relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-cover bg-center",
+          )}
+        >
+          <img
+            src={isQuizCompleted ? map2 : map3}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
           <div className="relative">
             <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
               Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна

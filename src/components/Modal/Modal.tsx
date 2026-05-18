@@ -21,8 +21,8 @@ export default function Modal({ isOpen, children }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 overflow-x-auto overflow-y-auto min-w-480">
-      {children}
+    <div className="fixed inset-0 overflow-x-auto overflow-y-auto">
+      <div className="min-w-480 my-auto h-full">{children}</div>
     </div>
   );
 }

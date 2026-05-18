@@ -9,15 +9,11 @@ interface QuizOption {
 
 interface QuizQuestionProps {
   question: string;
-
   options: QuizOption[];
-
   correctAnswerId: string;
-
+  children?: ReactNode;
   onCorrect?: () => void;
   onWrong?: () => void;
-
-  children?: ReactNode;
 }
 
 export default function QuizQuestion({
