@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import classNames from "classnames";
 
 import {
   Map,
@@ -12,22 +13,21 @@ import {
 
 import schoolboy3 from "@/assets/images/schoolboy3.png";
 import schoolboy from "@/assets/images/schoolboy.png";
-import hat from "@/assets/icons/hat.svg";
-import star from "@/assets/icons/star.svg";
-import clipboardList from "@/assets/icons/clipboardList.svg";
-import university from "@/assets/icons/university.svg";
 import olympicCenter from "@/assets/images/olympicCenter.png";
 import аcademy from "@/assets/images/аcademy.png";
-import globe from "@/assets/icons/globe.svg";
-import payment from "@/assets/icons/payment.svg";
-import noPayment from "@/assets/icons/noPayment.svg";
 import schoolboy4 from "@/assets/images/schoolboy4.png";
 import globalArea from "@/assets/images/globalArea.png";
 import qrCode from "@/assets/images/qrCode.png";
 import schoolboy5 from "@/assets/images/schoolboy5.png";
-import classNames from "classnames";
 import map2 from "@/assets/images/map2.png";
 import map3 from "@/assets/images/map3.png";
+import payment from "@/assets/icons/payment.svg";
+import noPayment from "@/assets/icons/noPayment.svg";
+import globe from "@/assets/icons/globe.svg";
+import hat from "@/assets/icons/hat.svg";
+import star from "@/assets/icons/star.svg";
+import clipboardList from "@/assets/icons/clipboardList.svg";
+import university from "@/assets/icons/university.svg";
 
 const Olympiad = observer(function Olympiad() {
   const [step, setStep] = useState(1);
@@ -339,7 +339,7 @@ const Olympiad = observer(function Olympiad() {
         >
           <img
             src={isQuizCompleted ? map2 : map3}
-            alt=""
+            alt="Карта"
             className="absolute inset-0 w-full h-full object-cover"
           />
 

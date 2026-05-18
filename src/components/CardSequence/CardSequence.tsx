@@ -25,14 +25,17 @@ export default function CardSequence({
   onSuccess,
 }: Props) {
   const [pool, setPool] = useState<Item[]>(() => items);
+
   const [slots, setSlots] = useState<(Item | null)[]>(() =>
     Array(correctOrder.length).fill(null),
   );
+
   const [wrong, setWrong] = useState<Record<string, boolean>>({});
 
   const isCompletedCorrectly = (slots: (Item | null)[]) => {
     return slots.every((slot, index) => {
       if (!slot) return false;
+
       return slot.id === correctOrder[index];
     });
   };
@@ -41,49 +44,55 @@ export default function CardSequence({
     const { source, destination } = result;
 
     if (!destination) return;
+
     if (source.droppableId !== "pool") return;
-    if (destination.droppableId !== "slots") return;
 
     const draggedItem = pool[source.index];
+
     if (!draggedItem) return;
 
-    const firstEmptySlotIndex = slots.findIndex((slot) => slot === null);
-    if (firstEmptySlotIndex === -1) return;
+    const slotIndex = Number(destination.droppableId.replace("slot-", ""));
 
-    const isCorrectPlacement =
-      correctOrder[firstEmptySlotIndex] === draggedItem.id;
+    if (Number.isNaN(slotIndex)) return;
+
+    if (slots[slotIndex]) return;
+
+    const isCorrectPlacement = correctOrder[slotIndex] === draggedItem.id;
 
     const newPool = pool.filter((_, idx) => idx !== source.index);
 
     const newSlots = [...slots];
-    newSlots[firstEmptySlotIndex] = draggedItem;
+
+    newSlots[slotIndex] = draggedItem;
 
     setPool(newPool);
     setSlots(newSlots);
 
     if (!isCorrectPlacement) {
-      setWrong((prev) => ({ ...prev, [draggedItem.id]: true }));
+      setWrong((prev) => ({
+        ...prev,
+        [draggedItem.id]: true,
+      }));
 
       setTimeout(() => {
         setWrong((prev) => {
-          const newWrong = { ...prev };
-          delete newWrong[draggedItem.id];
-          return newWrong;
+          const copy = { ...prev };
+
+          delete copy[draggedItem.id];
+
+          return copy;
         });
 
         setPool((prev) => [...prev, draggedItem]);
 
         setSlots((prev) => {
           const updated = [...prev];
-          const slotIndex = updated.findIndex(
-            (slot) => slot?.id === draggedItem.id,
-          );
-          if (slotIndex !== -1) {
-            updated[slotIndex] = null;
-          }
+
+          updated[slotIndex] = null;
+
           return updated;
         });
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -91,7 +100,6 @@ export default function CardSequence({
     if (slots.every(Boolean) && isCompletedCorrectly(slots)) {
       onSuccess?.();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slots, correctOrder, onSuccess]);
 
   return (
@@ -115,10 +123,13 @@ export default function CardSequence({
                     >
                       <div
                         className="min-w-14 h-14 rounded-xl flex items-center justify-center"
-                        style={{ backgroundColor: item.iconBg }}
+                        style={{
+                          backgroundColor: item.iconBg,
+                        }}
                       >
                         <img src={item.icon} alt={item.title} />
                       </div>
+
                       <p className="font-semibold text-[20px] ml-4">
                         {item.title}
                       </p>
@@ -126,25 +137,24 @@ export default function CardSequence({
                   )}
                 </Draggable>
               ))}
+
               {provided.placeholder}
             </div>
           )}
         </Droppable>
 
-        <Droppable droppableId="slots">
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className="bg-[#E9DACB] p-4 rounded-3xl flex flex-col gap-2 max-h-87"
-            >
-              {slots.map((item, index) => {
-                const isCorrect = item && correctOrder[index] === item.id;
-                const isWrong = item && wrong[item.id];
+        <div className="bg-[#E9DACB] p-4 rounded-3xl flex flex-col gap-2 max-h-87">
+          {slots.map((item, index) => {
+            const isCorrect = item && correctOrder[index] === item.id;
 
-                return (
+            const isWrong = item && wrong[item.id];
+
+            return (
+              <Droppable key={index} droppableId={`slot-${index}`}>
+                {(provided) => (
                   <div
-                    key={index}
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
                     className={`min-h-18.25 rounded-2xl border-2 border-dotted flex items-center justify-center transition-colors duration-300
                       ${
                         isCorrect
@@ -158,22 +168,24 @@ export default function CardSequence({
                       <div className="flex items-center gap-4 bg-white w-full px-6 rounded-2xl h-full">
                         <div
                           className="min-w-14 h-14 rounded-xl flex items-center justify-center"
-                          style={{ backgroundColor: item.iconBg }}
+                          style={{
+                            backgroundColor: item.iconBg,
+                          }}
                         >
                           <img src={item.icon} alt={item.title} />
                         </div>
+
                         <p className="font-semibold text-[20px] ml-4">
                           {item.title}
                         </p>
                       </div>
                     )}
                   </div>
-                );
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+                )}
+              </Droppable>
+            );
+          })}
+        </div>
       </div>
     </DragDropContext>
   );
