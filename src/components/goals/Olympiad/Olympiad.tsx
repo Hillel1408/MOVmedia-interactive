@@ -24,11 +24,13 @@ import noPayment from "@/assets/icons/noPayment.svg";
 import schoolboy4 from "@/assets/images/schoolboy4.png";
 import globalArea from "@/assets/images/globalArea.png";
 import qrCode from "@/assets/images/qrCode.png";
+import schoolboy5 from "@/assets/images/schoolboy5.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(10);
+  const [step, setStep] = useState(11);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
+  const [isQuizWrong, setIsQuizWrong] = useState(false);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -47,6 +49,16 @@ const Olympiad = observer(function Olympiad() {
 
     return () => clearTimeout(timer);
   }, [step]);
+
+  useEffect(() => {
+    if (!isQuizWrong) return;
+
+    const timer = setTimeout(() => {
+      setStep(11);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [isQuizWrong]);
 
   const mapStepConfig: Record<
     number,
@@ -70,6 +82,27 @@ const Olympiad = observer(function Olympiad() {
   };
 
   const currentMapConfig = mapStepConfig[step];
+
+  const quizQuestions = [
+    {
+      id: "1",
+      text: "Перейду по ссылке и оплачу — бонус пригодится",
+      icon: globe,
+      iconBg: "#3990F9",
+    },
+    {
+      id: "2",
+      text: "Оплачу доступ, на всякий случай напишу организатору, чтобы уточнить детали",
+      icon: payment,
+      iconBg: "#82C7E1",
+    },
+    {
+      id: "3",
+      text: "Не буду платить: участие в Олимпиаде бесплатное, а код из СМС — личная информация",
+      icon: noPayment,
+      iconBg: "#F46248",
+    },
+  ];
 
   return (
     <div className="relative">
@@ -165,12 +198,22 @@ const Olympiad = observer(function Olympiad() {
       )}
 
       <Modal isOpen={step === 5}>
-        <div className="grid grid-cols-[391px_1fr] items-end h-full">
+        <div className="grid grid-cols-[391px_1fr] items-end h-full relative">
           {isQuizCompleted ? (
             <div className="relative">
               <img src={schoolboy4} alt="Школьник" />
               <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-35 left-7.75">
                 В точку! Я бы так же ответил» Готов двигаться дальше?
+              </div>
+            </div>
+          ) : isQuizWrong ? (
+            <div>
+              <div className="absolute bottom-0">
+                <img src={schoolboy5} alt="Школьник" />
+                <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-45 left-7.75">
+                  Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна
+                  практика. Давай ещё раз?
+                </div>
               </div>
             </div>
           ) : (
@@ -201,28 +244,9 @@ const Olympiad = observer(function Olympiad() {
               correctAnswerId="3"
               onCorrect={() => setIsQuizCompleted(true)}
               onWrong={() => {
-                console.log("Неправильно");
+                setIsQuizWrong(true);
               }}
-              options={[
-                {
-                  id: "1",
-                  text: "Перейду по ссылке и оплачу — бонус пригодится",
-                  icon: globe,
-                  iconBg: "#3990F9",
-                },
-                {
-                  id: "2",
-                  text: "Оплачу доступ, на всякий случай напишу организатору, чтобы уточнить детали",
-                  icon: payment,
-                  iconBg: "#82C7E1",
-                },
-                {
-                  id: "3",
-                  text: "Не буду платить: участие в Олимпиаде бесплатное, а код из СМС — личная информация",
-                  icon: noPayment,
-                  iconBg: "#F46248",
-                },
-              ]}
+              options={quizQuestions}
             />
           </InfoCard>
         </div>
@@ -303,6 +327,38 @@ const Olympiad = observer(function Olympiad() {
           </div>
         </div>
       )}
+
+      <Modal isOpen={step === 11}>
+        <div className="grid grid-cols-[391px_548px] items-end justify-between h-full">
+          <div className="relative">
+            <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
+              Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна
+              практика. Давай ещё раз?
+            </div>
+            <img src={schoolboy} alt="Школьник" />
+          </div>
+          <div className="mr-14 mb-39.75">
+            <QuizQuestion
+              question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
+              correctAnswerId="3"
+              onCorrect={() => setIsQuizCompleted(true)}
+              onWrong={() => {
+                setIsQuizWrong(true);
+              }}
+              options={quizQuestions}
+            >
+              {isQuizCompleted && (
+                <ActionButton
+                  onClick={() => setStep(6)}
+                  className="w-full mt-6"
+                >
+                  Продолжить маршрут
+                </ActionButton>
+              )}
+            </QuizQuestion>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 });

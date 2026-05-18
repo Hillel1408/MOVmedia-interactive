@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 interface QuizOption {
   id: string;
@@ -16,6 +16,8 @@ interface QuizQuestionProps {
 
   onCorrect?: () => void;
   onWrong?: () => void;
+
+  children?: ReactNode;
 }
 
 export default function QuizQuestion({
@@ -24,6 +26,7 @@ export default function QuizQuestion({
   correctAnswerId,
   onCorrect,
   onWrong,
+  children,
 }: QuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
@@ -82,6 +85,8 @@ export default function QuizQuestion({
           );
         })}
       </div>
+
+      {children}
     </div>
   );
 }
