@@ -59,12 +59,12 @@ const Intro = observer(function Intro() {
   return (
     <div className="h-full min-h-screen bg-[url('assets/images/introMap.png')] bg-cover bg-center">
       {step === 1 && (
-        <div className="max-w-277.5 mx-auto text-center pt-22.5 pb-31">
+        <div className="max-w-277.5 mx-auto text-center py-22.5">
           <h1 className="font-semibold text-[120px] leading-33 text-[#0f0f33] mb-3">
             Город <br /> содружества
           </h1>
 
-          <p className="font-semibold text-[56px] leading-16 text-[#646872] mb-140.5">
+          <p className="font-semibold text-[56px] leading-16 text-[#646872] mb-115.5">
             Пространство для твоего развития
           </p>
 

@@ -28,20 +28,22 @@ import hat from "@/assets/icons/hat.svg";
 import star from "@/assets/icons/star.svg";
 import clipboardList from "@/assets/icons/clipboardList.svg";
 import university from "@/assets/icons/university.svg";
+import globalArea2 from "@/assets/images/globalArea2.png";
+import schoolboy6 from "@/assets/images/schoolboy6.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setStep(2);
-    }, 5000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setStep(2);
+  //   }, 5000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   useEffect(() => {
     if (step !== 7) return;
@@ -246,6 +248,7 @@ const Olympiad = observer(function Olympiad() {
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
               correctAnswerId="3"
               onCorrect={() => setIsQuizCompleted(true)}
+              resetDelay={5000}
               onWrong={() => {
                 setIsQuizWrong(true);
               }}
@@ -290,7 +293,11 @@ const Olympiad = observer(function Olympiad() {
               </div>
             )}
           </div>
-          <InfoCard title="Академия" backgroundImage={globalArea} className="">
+          <InfoCard
+            title="Академия"
+            backgroundImage={step === 9 ? globalArea2 : globalArea}
+            className=""
+          >
             {step === 7 && <></>}
             {step === 8 && (
               <ActionButton
@@ -343,13 +350,25 @@ const Olympiad = observer(function Olympiad() {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          <div className="relative">
-            <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
-              Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна
-              практика. Давай ещё раз?
+          {isQuizWrong ? (
+            <div>
+              <div className="absolute bottom-0">
+                <img src={schoolboy6} alt="Школьник" />
+                <div className="text-[24px] leading-[115%] text-white w-63.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-20 left-14">
+                  Давай ещё раз
+                </div>
+              </div>
             </div>
-            <img src={schoolboy} alt="Школьник" />
-          </div>
+          ) : (
+            <div className="relative">
+              <img src={schoolboy} alt="Школьник" />
+              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
+                Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна
+                практика. Давай ещё раз?
+              </div>
+            </div>
+          )}
+
           <div className="mr-14 mb-39.75">
             <QuizQuestion
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"

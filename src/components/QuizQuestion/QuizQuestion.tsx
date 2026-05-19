@@ -14,6 +14,7 @@ interface QuizQuestionProps {
   children?: ReactNode;
   onCorrect?: () => void;
   onWrong?: () => void;
+  resetDelay?: number;
 }
 
 export default function QuizQuestion({
@@ -23,6 +24,7 @@ export default function QuizQuestion({
   onCorrect,
   onWrong,
   children,
+  resetDelay = 3000,
 }: QuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
@@ -35,6 +37,10 @@ export default function QuizQuestion({
       onCorrect?.();
     } else {
       onWrong?.();
+
+      setTimeout(() => {
+        setSelectedAnswer(null);
+      }, resetDelay);
     }
   };
 
