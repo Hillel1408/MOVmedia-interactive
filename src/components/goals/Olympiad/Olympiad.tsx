@@ -272,7 +272,7 @@ const Olympiad = observer(function Olympiad() {
           <div className="relative">
             <img src={schoolboy} alt="Школьник" />
             {step === 7 && (
-              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-75 left-7.75">
+              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-100 left-7.75">
                 Это наше Международное движение, здесь люди из разных стран
                 объединяются вокруг финансовой безопасности. Ты сможешь найти
                 единомышленников, рассказать о себе и стать его важной частью.
