@@ -6,7 +6,7 @@ import { Map, ActionButton } from "../../components";
 
 import { rootStore } from "../../stores/rootStore";
 
-import schoolboy2 from "@/assets/images/schoolboy2.png";
+import { schoolboy2 } from "../../assets/images";
 
 const Schoolboy = observer(function Schoolboy() {
   const [step, setStep] = useState(1);
@@ -24,7 +24,13 @@ const Schoolboy = observer(function Schoolboy() {
       <Map />
 
       <div className="absolute bottom-0 left-0">
-        <img src={schoolboy2} alt="Школьник" className="relative z-10" />
+        <img
+          src={schoolboy2}
+          width={535}
+          height={692}
+          alt="Школьник"
+          className="relative z-10"
+        />
 
         <div
           className={classNames(

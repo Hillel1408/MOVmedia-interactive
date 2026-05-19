@@ -8,6 +8,8 @@ import ActionButton from "./ActionButton/ActionButton";
 import InfoCard from "./InfoCard/InfoCard";
 import QuizQuestion from "./QuizQuestion/QuizQuestion";
 import Security from "./goals/Security/Security";
+import TypewriterText from "./TypewriterText/TypewriterText";
+import Movement from "./goals/Movement/Movement";
 
 export {
   Intro,
@@ -20,4 +22,6 @@ export {
   InfoCard,
   QuizQuestion,
   Security,
+  TypewriterText,
+  Movement,
 };

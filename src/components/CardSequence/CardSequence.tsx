@@ -6,7 +6,7 @@ import {
   Draggable,
 } from "@hello-pangea/dnd";
 
-import tach from "@/assets/icons/tach.svg";
+import { tach } from "../../assets/icons";
 
 type Item = {
   id: string;
