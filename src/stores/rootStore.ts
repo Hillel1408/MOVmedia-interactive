@@ -6,7 +6,7 @@ class RootStore {
   // goal: string | null = null;
   role: string | null = "schoolboy";
   isIntroFinished = true;
-  goal: string | null = "olympiad";
+  goal: string | null = "security";
 
   constructor() {
     makeAutoObservable(this);

@@ -32,18 +32,18 @@ import globalArea2 from "@/assets/images/globalArea2.png";
 import schoolboy6 from "@/assets/images/schoolboy6.png";
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setStep(2);
-  //   }, 5000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStep(2);
+    }, 5000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (step !== 7) return;
