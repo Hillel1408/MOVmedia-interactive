@@ -1,12 +1,12 @@
 import { makeAutoObservable } from "mobx";
 
 class RootStore {
-  // role: string | null = null;
-  // isIntroFinished = false;
-  // goal: string | null = null;
-  role: string | null = "schoolboy";
-  isIntroFinished = true;
-  goal: string | null = "security";
+  role: string | null = null;
+  isIntroFinished = false;
+  goal: string | null = null;
+  // role: string | null = "schoolboy";
+  // isIntroFinished = true;
+  // goal: string | null = "security";
 
   constructor() {
     makeAutoObservable(this);

@@ -9,15 +9,15 @@ import globalArea from "@/assets/images/globalArea.png";
 import globalArea2 from "@/assets/images/globalArea2.png";
 
 const Security = observer(function Security() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setStep(2);
-  //   }, 5000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStep(2);
+    }, 5000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (step !== 3) return;
