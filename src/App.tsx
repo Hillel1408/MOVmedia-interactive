@@ -1,27 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { observer } from "mobx-react-lite";
 
-import { Intro, Schoolboy, Olympiad, Security } from "./components";
-import { rootStore } from "./stores/rootStore";
+import Home from "./pages/home";
+import Teaser from "./pages/teaser";
 
-const App = observer(function App() {
-  if (!rootStore.isIntroFinished) {
-    return <Intro />;
-  }
-
-  if (rootStore.role === "schoolboy" && rootStore.goal === "olympiad") {
-    return <Olympiad />;
-  }
-
-  if (rootStore.role === "schoolboy" && rootStore.goal === "security") {
-    return <Security />;
-  }
-
-  if (rootStore.role === "schoolboy") {
-    return <Schoolboy />;
-  }
-
-  return null;
+const App = (function App() {
+  return (
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/teaser" element={<Teaser />} />
+        </Routes>
+    </BrowserRouter>
+  );
 });
 
 export default App;
