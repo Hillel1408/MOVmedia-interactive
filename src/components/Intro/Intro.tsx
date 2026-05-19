@@ -3,10 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { rootStore } from "../../stores/rootStore";
 
-import schoolboy from "@/assets/images/schoolboy.png";
-import student from "@/assets/images/student.png";
-import expert from "@/assets/images/expert.png";
-import teacher from "@/assets/images/teacher.png";
+import { schoolboy, student, expert, teacher } from "../../assets/images";
 
 const roles = [
   {

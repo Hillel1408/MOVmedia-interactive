@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 
 import { ActionButton } from "../../components";
 
-import map from "@/assets/images/map.png";
+import { map } from "../../assets/images";
 
 interface MapProps {
   buttonText?: string;
