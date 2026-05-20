@@ -40,7 +40,7 @@ const Olympiad = observer(function Olympiad() {
       setStep(2);
     }
 
-    if (step === 5 && isQuizWrong && !isQuizCompleted) {
+    if (step === 5 && isQuizWrong) {
       setStep(11);
     }
 
@@ -213,6 +213,7 @@ const Olympiad = observer(function Olympiad() {
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
               correctAnswerId="3"
               onCorrect={() => setIsQuizCompleted(true)}
+              singleAttempt
               onWrong={() => {
                 setIsQuizWrong(true);
               }}

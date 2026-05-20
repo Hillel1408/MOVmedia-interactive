@@ -35,7 +35,7 @@ const Security = observer(function Security() {
       setStep(4);
     }
 
-    if (step === 7 && isQuizWrong && !isQuizCompleted) {
+    if (step === 7 && isQuizWrong) {
       setStep(9);
     }
   };
@@ -198,6 +198,7 @@ const Security = observer(function Security() {
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
               correctAnswerId="3"
               onCorrect={() => setIsQuizCompleted(true)}
+              singleAttempt
               onWrong={() => {
                 setIsQuizWrong(true);
               }}

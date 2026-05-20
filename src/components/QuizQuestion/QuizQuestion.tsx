@@ -14,6 +14,7 @@ interface QuizQuestionProps {
   children?: ReactNode;
   onCorrect?: () => void;
   onWrong?: () => void;
+  singleAttempt?: boolean;
 }
 
 export default function QuizQuestion({
@@ -23,10 +24,15 @@ export default function QuizQuestion({
   onCorrect,
   onWrong,
   children,
+  singleAttempt = false,
 }: QuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const handleAnswerClick = (id: string) => {
+    if (singleAttempt && selectedAnswer !== null) {
+      return;
+    }
+
     setSelectedAnswer(id);
 
     if (id === correctAnswerId) {
@@ -61,6 +67,7 @@ export default function QuizQuestion({
                       : 'border-red-500'
                     : 'border-transparent'
                 }
+                ${singleAttempt && selectedAnswer !== null ? 'cursor-default' : 'cursor-pointer'}
               `}
             >
               <div
