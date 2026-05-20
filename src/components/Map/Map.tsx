@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 
-import { map, olympicCenterMap, academyMap, globalAreaMap } from '../../assets/images';
+import { map } from '../../assets/images';
 
 interface MapProps {
   buttonText?: string;
@@ -11,12 +11,13 @@ const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
   return (
     <div className="relative">
       <img src={map} alt="Карты" className="w-full object-cover" />
+
       <div>
         <button
           className="absolute top-[26%] right-[2.5%]"
           onClick={() => buttonText === 'Олимпиадный центр' && onButtonClick?.()}
         >
-          <img src={olympicCenterMap} alt="Олимпиадный центр" />
+          <img src="/assets/olympicCenterMap.png" alt="Олимпиадный центр" />
         </button>
       </div>
 
@@ -24,14 +25,14 @@ const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
         className="absolute top-[17%] right-[27%]"
         onClick={() => buttonText === 'Академия' && onButtonClick?.()}
       >
-        <img src={academyMap} alt="Академия" />
+        <img src="/assets/academyMap.png" alt="Академия" />
       </button>
 
       <button
         className="absolute top-[30%] right-[38%]"
         onClick={() => buttonText === 'Глобальная площадь' && onButtonClick?.()}
       >
-        <img src={globalAreaMap} alt="Глобальная площадь" />
+        <img src="/assets/globalAreaMap.png" alt="Глобальная площадь" />
       </button>
     </div>
   );

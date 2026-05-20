@@ -15,9 +15,6 @@ import teacher from '@/assets/images/teacher.png';
 import schoolboy6 from '@/assets/images/schoolboy6.png';
 import map from '@/assets/images/map.png';
 import schoolboy2 from '@/assets/images/schoolboy2.png';
-import olympicCenterMap from '@/assets/images/map/olympicCenterMap.png';
-import academyMap from '@/assets/images/map/academyMap.png';
-import globalAreaMap from '@/assets/images/map/globalAreaMap.png';
 
 export {
   schoolboy3,
@@ -37,7 +34,4 @@ export {
   schoolboy6,
   map,
   schoolboy2,
-  olympicCenterMap,
-  academyMap,
-  globalAreaMap,
 };
