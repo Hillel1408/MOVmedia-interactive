@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 
@@ -72,13 +72,6 @@ const Olympiad = observer(function Olympiad() {
   };
 
   const currentMapConfig = mapStepConfig[step];
-
-  useEffect(() => {
-    [map2, map3].forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
 
   return (
     <div
@@ -314,21 +307,7 @@ const Olympiad = observer(function Olympiad() {
             'relative grid grid-cols-[391px_548px] items-end justify-between h-full'
           )}
         >
-          <img
-            src={map2}
-            className={classNames(
-              'absolute inset-0 w-full h-full object-cover',
-              isQuizCompleted ? 'opacity-100' : 'opacity-0'
-            )}
-          />
-
-          <img
-            src={map3}
-            className={classNames(
-              'absolute inset-0 w-full h-full object-cover',
-              !isQuizCompleted ? 'opacity-100' : 'opacity-0'
-            )}
-          />
+          <img src={map2} alt="Карта" className="absolute inset-0 w-full h-full object-cover" />
 
           {isQuizCompleted ? (
             <div className="relative">

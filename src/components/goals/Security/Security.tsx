@@ -69,13 +69,6 @@ const Security = observer(function Security() {
 
   const currentMapConfig = mapStepConfig[step];
 
-  useEffect(() => {
-    [map2, map3].forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
   return (
     <div
       className="relative"
@@ -245,19 +238,9 @@ const Security = observer(function Security() {
           )}
         >
           <img
-            src={map2}
-            className={classNames(
-              'absolute inset-0 w-full h-full object-cover',
-              isQuizCompleted ? 'opacity-100' : 'opacity-0'
-            )}
-          />
-
-          <img
-            src={map3}
-            className={classNames(
-              'absolute inset-0 w-full h-full object-cover',
-              !isQuizCompleted ? 'opacity-100' : 'opacity-0'
-            )}
+            src={isQuizCompleted ? map2 : map3}
+            alt="Карта"
+            className="absolute inset-0 w-full h-full object-cover"
           />
 
           {isQuizCompleted ? (
