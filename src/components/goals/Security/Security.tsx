@@ -19,7 +19,6 @@ import {
   map3,
   schoolboy6,
 } from '../../../assets/images';
-import classNames from 'classnames';
 
 const Security = observer(function Security() {
   const [step, setStep] = useState(1);
@@ -229,11 +228,7 @@ const Security = observer(function Security() {
       )}
 
       <Modal isOpen={step === 9}>
-        <div
-          className={classNames(
-            'relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-[#f7eae1]'
-          )}
-        >
+        <div className="relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-[#f7eae1]">
           <img
             src={isQuizCompleted ? map2 : map3}
             alt="Карта"
