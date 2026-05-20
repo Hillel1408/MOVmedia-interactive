@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 
@@ -71,6 +71,13 @@ const Olympiad = observer(function Olympiad() {
   };
 
   const currentMapConfig = mapStepConfig[step];
+
+  useEffect(() => {
+    [map2].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   return (
     <div
@@ -303,7 +310,7 @@ const Olympiad = observer(function Olympiad() {
       <Modal isOpen={step === 11}>
         <div
           className={classNames(
-            'relative grid grid-cols-[391px_548px] items-end justify-between h-full'
+            'relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-[#f7eae1]'
           )}
         >
           <img src={map2} alt="Карта" className="absolute inset-0 w-full h-full object-cover" />

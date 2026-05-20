@@ -234,7 +234,7 @@ const Security = observer(function Security() {
       <Modal isOpen={step === 9}>
         <div
           className={classNames(
-            'relative grid grid-cols-[391px_548px] items-end justify-between h-full'
+            'relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-[#f7eae1]'
           )}
         >
           <img
