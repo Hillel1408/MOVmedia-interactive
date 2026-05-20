@@ -22,7 +22,7 @@ import {
 import classNames from 'classnames';
 
 const Security = observer(function Security() {
-  const [step, setStep] = useState(7);
+  const [step, setStep] = useState(1);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
