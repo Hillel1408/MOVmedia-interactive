@@ -1,7 +1,9 @@
 import schoolboy from '@/assets/images/schoolboyTeas2.png';
 import correctAnswer from '@/assets/images/correctAnswer.png';
 
-const TeaserCorrect = () => {
+const TeaserCorrect = ({ role }: { role: string }) => {
+  const person = role === 'schoolboy' ? schoolboy : '';
+
   return (
     <div className="absolute w-full top-20 flex flex-col px-25 items-center">
       <p className=" font-semibold text-[100px] text-center leading-none">
@@ -9,7 +11,7 @@ const TeaserCorrect = () => {
         справились? <br /> Может тоже попробуете?
       </p>
       <div className="relative inline-block">
-        <img src={schoolboy} alt="" className="relative z-10 w-280 object-cover" />
+        <img src={person} alt="" className="relative z-10 w-280 object-cover" />
         <img
           src={correctAnswer}
           alt=""

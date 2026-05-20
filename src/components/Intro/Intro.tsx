@@ -1,33 +1,34 @@
-import { useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
+import { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { rootStore } from "../../stores/rootStore";
+import { rootStore } from '../../stores/rootStore';
 
-import { schoolboy, student, expert, teacher } from "../../assets/images";
+import { schoolboy, student, expert, teacher } from '../../assets/images';
+import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
 
 const roles = [
   {
-    key: "schoolboy",
-    title: "Школьник",
-    name: "Артём",
+    key: 'schoolboy',
+    title: 'Школьник',
+    name: 'Артём',
     image: schoolboy,
   },
   {
-    key: "student",
-    title: "Студент",
-    name: "Диана",
+    key: 'student',
+    title: 'Студент',
+    name: 'Диана',
     image: student,
   },
   {
-    key: "expert",
-    title: "Эксперт",
-    name: "Екатерина",
+    key: 'expert',
+    title: 'Эксперт',
+    name: 'Екатерина',
     image: expert,
   },
   {
-    key: "teacher",
-    title: "Представитель ВУЗа",
-    name: "Алексей",
+    key: 'teacher',
+    title: 'Представитель ВУЗа',
+    name: 'Алексей',
     image: teacher,
   },
 ];
@@ -35,12 +36,25 @@ const roles = [
 const Intro = observer(function Intro() {
   const [step, setStep] = useState(1);
 
+  const { send } = useBroadcastChannel('app-channel');
+
   const handleSelectRole = (role: string) => {
     rootStore.setRole(role);
+    send('teaser', {
+      screen: 'role',
+      role,
+    });
 
     setTimeout(() => {
       rootStore.finishIntro();
     }, 2000);
+  };
+
+  const handleStart = () => {
+    setStep(2);
+    send('teaser', {
+      screen: 'start',
+    });
   };
 
   useEffect(() => {
@@ -68,7 +82,7 @@ const Intro = observer(function Intro() {
           <button
             type="button"
             className="h-24 mx-auto flex items-center justify-center w-95.75 bg-[#EA5614] shadow-[0px_18px_40px_0px_#32292299] rounded-3xl font-semibold text-[40px] leading-12 text-white"
-            onClick={() => setStep(2)}
+            onClick={handleStart}
           >
             Начать
           </button>
@@ -83,10 +97,9 @@ const Intro = observer(function Intro() {
 
           {step === 3 && (
             <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
-              Здесь есть всё для вашего развития и профессионального роста в
-              финансовой безопасности и смежных сферах. Мы поможем раскрыть
-              талант, построить карьеру, реализовать экспертизу, найти
-              партнёров, единомышленников и наставников.
+              Здесь есть всё для вашего развития и профессионального роста в финансовой безопасности
+              и смежных сферах. Мы поможем раскрыть талант, построить карьеру, реализовать
+              экспертизу, найти партнёров, единомышленников и наставников.
             </p>
           )}
 
@@ -114,7 +127,7 @@ const Intro = observer(function Intro() {
                 key={role.key}
                 type="button"
                 onClick={() => handleSelectRole(role.key)}
-                className={`overflow-hidden rounded-4xl flex flex-col items-center pt-9.5 transition hover:scale-[1.02] backdrop-blur-[60px] ${rootStore.role === role.key ? "bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%),linear-gradient(0deg,#C7470F,#C7470F)]" : "bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%)]"}`}
+                className={`overflow-hidden rounded-4xl flex flex-col items-center pt-9.5 transition hover:scale-[1.02] backdrop-blur-[60px] ${rootStore.role === role.key ? 'bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%),linear-gradient(0deg,#C7470F,#C7470F)]' : 'bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%)]'}`}
               >
                 <span className="font-semibold text-[36px] leading-11 text-[#FFFFFF80]">
                   {role.title}
