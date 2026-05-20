@@ -1,7 +1,5 @@
 import { observer } from 'mobx-react-lite';
 
-import { map } from '../../assets/images';
-
 interface MapProps {
   buttonText?: string;
   onButtonClick?: () => void;
@@ -10,7 +8,7 @@ interface MapProps {
 const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
   return (
     <div className="relative">
-      <img src={map} alt="Карты" className="w-full object-cover" />
+      <img src="/assets/map.png" alt="Карты" className="w-full object-cover" />
 
       <div>
         <button

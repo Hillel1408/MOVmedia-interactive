@@ -13,7 +13,6 @@ import student from '@/assets/images/student.png';
 import expert from '@/assets/images/expert.png';
 import teacher from '@/assets/images/teacher.png';
 import schoolboy6 from '@/assets/images/schoolboy6.png';
-import map from '@/assets/images/map.png';
 import schoolboy2 from '@/assets/images/schoolboy2.png';
 
 export {
@@ -32,6 +31,5 @@ export {
   expert,
   teacher,
   schoolboy6,
-  map,
   schoolboy2,
 };
