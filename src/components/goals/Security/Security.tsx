@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Map, Modal, InfoCard, ActionButton, QuizQuestion } from '../../../components';
 
+import { rootStore } from '../../../stores/rootStore';
 import { quizQuestions } from '../../../constans/quizQuestions';
 
 import {
@@ -13,20 +14,31 @@ import {
   globalArea,
   schoolboy5,
   globalArea2,
+  qrCode,
+  map2,
+  map3,
+  schoolboy6,
 } from '../../../assets/images';
+import classNames from 'classnames';
 
 const Security = observer(function Security() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(7);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const handleNextStep = () => {
+    if (step === 1) {
       setStep(2);
-    }, 5000);
+    }
 
-    return () => clearTimeout(timer);
-  }, []);
+    if (step === 3) {
+      setStep(4);
+    }
+
+    if (step === 7 && isQuizWrong && !isQuizCompleted) {
+      setStep(9);
+    }
+  };
 
   useEffect(() => {
     if (step !== 3) return;
@@ -58,7 +70,12 @@ const Security = observer(function Security() {
   const currentMapConfig = mapStepConfig[step];
 
   return (
-    <div className="relative h-screen">
+    <div
+      className="relative"
+      onClick={() => {
+        handleNextStep();
+      }}
+    >
       <Map buttonText={currentMapConfig?.buttonText} onButtonClick={currentMapConfig?.onClick} />
 
       {step === 1 && (
@@ -106,7 +123,7 @@ const Security = observer(function Security() {
             )}
           </div>
           <InfoCard
-            title="Академия"
+            title="Глобальная площадь"
             backgroundImage={step === 5 ? globalArea2 : globalArea}
             className=""
           >
@@ -181,6 +198,96 @@ const Security = observer(function Security() {
               options={quizQuestions}
             />
           </InfoCard>
+        </div>
+      </Modal>
+
+      {step === 8 && (
+        <div className="absolute right-0 bottom-0">
+          <img src={schoolboy4} width={391} height={560} alt="Школьник" className="relative z-10" />
+          <div className="text-[31px] font-semibold leading-10 text-[#393C42] w-172.5 p-10 absolute rounded-4xl backdrop-blur-[60px] bottom-75.5 right-35.5 bg-[linear-gradient(180deg,rgba(255,247,241,0.80)_0%,rgba(255,237,224,0.80)_100%)]">
+            <p className="mb-10">
+              Отличная работа! Ты добрался до конца маршрута и теперь знаешь как много возможностей
+              есть на платформе «Содружество»! Переходи по QR-коду и продолжай выполнять задания,
+              чтобы получить крутой мерч!
+            </p>
+            <div className="flex gap-6 items-center">
+              <img src={qrCode} alt="QR код" width={283} height={283} />
+              <span className="text-[40px] leading-12 font-semibold text-[#393C42]">
+                Сканируй <br /> меня
+              </span>
+            </div>
+            <ActionButton
+              onClick={() => {
+                setStep(1);
+                rootStore.setRole(null);
+                rootStore.finishIntro(false);
+                rootStore.setGoal(null);
+              }}
+              className="mt-5"
+            >
+              Вернуться в начало
+            </ActionButton>
+          </div>
+        </div>
+      )}
+
+      <Modal isOpen={step === 9}>
+        <div
+          className={classNames(
+            'relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-cover bg-center'
+          )}
+        >
+          <img
+            src={isQuizCompleted ? map2 : map3}
+            alt="Карта"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {isQuizCompleted ? (
+            <div className="relative">
+              <img src={schoolboy4} width={391} height={560} alt="Школьник" />
+              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-35 left-7.75">
+                В точку! Я бы так же ответил» Готов двигаться дальше?
+              </div>
+            </div>
+          ) : isQuizWrong ? (
+            <div>
+              <div className="absolute bottom-0">
+                <img src={schoolboy6} width={524} height={549} alt="Школьник" />
+                <div className="text-[24px] leading-[115%] text-white w-63.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-20 left-14">
+                  Давай ещё раз
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="absolute bottom-0">
+                <img src={schoolboy} width={438} height={580} alt="Школьник" />
+                <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
+                  Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна практика. Давай ещё
+                  раз?
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="mr-14 mb-39.75">
+            <QuizQuestion
+              question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
+              correctAnswerId="3"
+              onCorrect={() => setIsQuizCompleted(true)}
+              onWrong={() => {
+                setIsQuizWrong(true);
+              }}
+              options={quizQuestions}
+            >
+              {isQuizCompleted && (
+                <ActionButton onClick={() => setStep(8)} className="w-full mt-6">
+                  Продолжить маршрут
+                </ActionButton>
+              )}
+            </QuizQuestion>
+          </div>
         </div>
       </Modal>
     </div>

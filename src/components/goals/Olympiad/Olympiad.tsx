@@ -11,6 +11,7 @@ import {
   QuizQuestion,
 } from '../../../components';
 
+import { rootStore } from '../../../stores/rootStore';
 import { quizQuestions } from '../../../constans/quizQuestions';
 
 import {
@@ -30,7 +31,7 @@ import {
 import { hat, star, clipboardList, university } from '../../../assets/icons';
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
@@ -285,6 +286,17 @@ const Olympiad = observer(function Olympiad() {
                 Сканируй <br /> меня
               </span>
             </div>
+            <ActionButton
+              onClick={() => {
+                setStep(1);
+                rootStore.setRole(null);
+                rootStore.finishIntro(false);
+                rootStore.setGoal(null);
+              }}
+              className="mt-5"
+            >
+              Вернуться в начало
+            </ActionButton>
           </div>
         </div>
       )}

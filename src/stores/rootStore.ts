@@ -1,26 +1,26 @@
 import { makeAutoObservable } from 'mobx';
 
 class RootStore {
-  // role: string | null = null;
-  // isIntroFinished = false;
-  // goal: string | null = null;
-  role: string | null = 'schoolboy';
-  isIntroFinished = true;
-  goal: string | null = 'olympiad';
+  role: string | null = null;
+  isIntroFinished = false;
+  goal: string | null = null;
+  // role: string | null = 'schoolboy';
+  // isIntroFinished = true;
+  // goal: string | null = 'security';
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setRole(role: string) {
+  setRole(role: string | null) {
     this.role = role;
   }
 
-  finishIntro() {
-    this.isIntroFinished = true;
+  finishIntro(finished: boolean) {
+    this.isIntroFinished = finished;
   }
 
-  setGoal(goal: string) {
+  setGoal(goal: string | null) {
     this.goal = goal;
   }
 }

@@ -38,7 +38,7 @@ const Intro = observer(function Intro() {
     rootStore.setRole(role);
 
     setTimeout(() => {
-      rootStore.finishIntro();
+      rootStore.finishIntro(true);
     }, 2000);
   };
 
