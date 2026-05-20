@@ -13,15 +13,25 @@ import TeaserStart from '@/components/teaser/TeaserStart/TeaserStart';
 import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
 
 const Teaser = () => {
-  const [screen, setScreen] = useState('intro');
-  const [role, setRole] = useState('');
+  const [screen, setScreen] = useState(() => {
+    const saved = sessionStorage.getItem('screen');
+    return saved ? JSON.parse(saved) : 'intro';
+  });
+  const [role, setRole] = useState(() => {
+    const saved = sessionStorage.getItem('role');
+    return saved ? JSON.parse(saved) : '';
+  });
   const { useListen, isReady } = useBroadcastChannel<{ screen: string; role?: string }>(
     'app-channel'
   );
 
   useListen('teaser', (data) => {
     setScreen(data.screen);
-    if(data.role) setRole(data.role)
+    if (data.role) {
+      setRole(data.role);
+      sessionStorage.setItem('role', JSON.stringify(data.role));
+    }
+    sessionStorage.setItem('screen', JSON.stringify(data.screen));
   });
 
   const renderContent = () => {
