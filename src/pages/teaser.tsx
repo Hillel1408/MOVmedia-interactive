@@ -21,7 +21,7 @@ const Teaser = () => {
     const saved = sessionStorage.getItem('role');
     return saved ? JSON.parse(saved) : '';
   });
-  const { useListen, isReady } = useBroadcastChannel<{ screen: string; role?: string }>(
+  const { useListen, isReady } = useBroadcastChannel(
     'app-channel'
   );
 

@@ -9,7 +9,7 @@ const Home = observer(function Home() {
   const { send } = useBroadcastChannel('app-channel');
 
   useEffect(() => {
-    send('teaser', { screen: 'intro', role: '' });
+    send('teaser', { screen: 'intro', role: undefined });
   }, []);
 
   if (!rootStore.isIntroFinished) {

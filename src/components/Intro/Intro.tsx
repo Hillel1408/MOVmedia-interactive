@@ -6,7 +6,14 @@ import { rootStore } from '../../stores/rootStore';
 import { schoolboy, student, expert, teacher } from '../../assets/images';
 import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
 
-const roles = [
+type TRole = {
+    key: 'schoolboy' | 'student' | 'expert' | 'teacher';
+    title: string;
+    name: string;
+    image: string;
+}
+
+const roles: TRole[] = [
   {
     key: 'schoolboy',
     title: 'Школьник',
@@ -38,7 +45,7 @@ const Intro = observer(function Intro() {
 
   const { send } = useBroadcastChannel('app-channel');
 
-  const handleSelectRole = (role: string) => {
+  const handleSelectRole = (role: TRole['key']) => {
     rootStore.setRole(role);
     send('teaser', {
       screen: 'role',

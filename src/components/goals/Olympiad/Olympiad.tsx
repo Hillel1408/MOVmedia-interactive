@@ -169,6 +169,16 @@ const Olympiad = observer(function Olympiad() {
             <CardSequence
               onSuccess={() => setIsSequenceCompleted(true)}
               correctOrder={['clipboardList', 'star', 'hat', 'university']}
+              onCorrect={() =>
+                send('teaser', {
+                  screen: 'correct',
+                })
+              }
+              onWrong={() =>
+                send('teaser', {
+                  screen: 'incorrect',
+                })
+              }
               items={[
                 {
                   id: 'hat',

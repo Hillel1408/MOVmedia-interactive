@@ -1,6 +1,20 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 
-export const useBroadcastChannel = <T = unknown,>(channelName: string) => {
+type TPayload = {
+  screen:
+    | 'intro'
+    | 'start'
+    | 'role'
+    | 'goal'
+    | 'route'
+    | 'question'
+    | 'correct'
+    | 'incorrect'
+    | 'final';
+  role?: 'schoolboy' | 'student' | 'expert' | 'teacher';
+};
+
+export const useBroadcastChannel = (channelName: string) => {
   const channelRef = useRef<BroadcastChannel | null>(null);
   const senderIdRef = useRef(crypto.randomUUID());
   const [isReady, setIsReady] = useState(false);
@@ -61,7 +75,7 @@ export const useBroadcastChannel = <T = unknown,>(channelName: string) => {
     };
   }, [setupChannel]);
 
-  const send = useCallback((type: string, payload: T) => {
+  const send = useCallback((type: string, payload: TPayload) => {
     if (!channelRef.current) return false;
 
     channelRef.current.postMessage({
@@ -73,7 +87,7 @@ export const useBroadcastChannel = <T = unknown,>(channelName: string) => {
     return true;
   }, []);
 
-  const useListen = (type: string, handler: (payload: T) => void) => {
+  const useListen = (type: string, handler: (payload: TPayload) => void) => {
     useEffect(() => {
       if (!channelRef.current) return;
 
