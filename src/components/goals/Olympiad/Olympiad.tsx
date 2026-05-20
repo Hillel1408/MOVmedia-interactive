@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 
@@ -31,43 +31,30 @@ import { hat, star, clipboardList, university } from '../../../assets/icons';
 import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
   const { send } = useBroadcastChannel('app-channel');
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const handleNextStep = () => {
+    if (step === 1) {
       setStep(2);
       send('teaser', {
         screen: 'route',
       });
-    }, 5000);
+    }
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (step !== 7) return;
-
-    const timer = setTimeout(() => {
-      setStep(8);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [step]);
-
-  useEffect(() => {
-    if (!isQuizWrong) return;
-
-    const timer = setTimeout(() => {
+    if (step === 5 && isQuizWrong && !isQuizCompleted) {
       setStep(11);
-    }, 5000);
+    }
 
-    return () => clearTimeout(timer);
-  }, [isQuizWrong]);
+    if (step === 7) {
+      setStep(8);
+    }
+  };
+
 
   const handleMapClick = (step: number) => {
     setStep(step);
@@ -121,7 +108,12 @@ const Olympiad = observer(function Olympiad() {
   const currentMapConfig = mapStepConfig[step];
 
   return (
-    <div className="relative h-screen">
+    <div
+      className="relative"
+      onClick={() => {
+        handleNextStep();
+      }}
+    >
       <Map buttonText={currentMapConfig?.buttonText} onButtonClick={currentMapConfig?.onClick} />
 
       {step === 1 && (
@@ -260,7 +252,6 @@ const Olympiad = observer(function Olympiad() {
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
               correctAnswerId="3"
               onCorrect={handleCorrectAnswer}
-              resetDelay={5000}
               onWrong={handleIncorrectAnswer}
               options={quizQuestions}
             />
@@ -303,7 +294,7 @@ const Olympiad = observer(function Olympiad() {
             )}
           </div>
           <InfoCard
-            title="Академия"
+            title="Глобальная площадь"
             backgroundImage={step === 9 ? globalArea2 : globalArea}
             className=""
           >
@@ -353,7 +344,14 @@ const Olympiad = observer(function Olympiad() {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {isQuizWrong ? (
+          {isQuizCompleted ? (
+            <div className="relative">
+              <img src={schoolboy4} width={391} height={560} alt="Школьник" />
+              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-35 left-7.75">
+                В точку! Я бы так же ответил» Готов двигаться дальше?
+              </div>
+            </div>
+          ) : isQuizWrong ? (
             <div>
               <div className="absolute bottom-0">
                 <img src={schoolboy6} width={524} height={549} alt="Школьник" />
@@ -363,11 +361,13 @@ const Olympiad = observer(function Olympiad() {
               </div>
             </div>
           ) : (
-            <div className="relative">
-              <img src={schoolboy} width={438} height={580} alt="Школьник" />
-              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
-                Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна практика. Давай ещё
-                раз?
+            <div>
+              <div className="absolute bottom-0">
+                <img src={schoolboy} width={438} height={580} alt="Школьник" />
+                <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-50 left-7.75">
+                  Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна практика. Давай ещё
+                  раз?
+                </div>
               </div>
             </div>
           )}
@@ -376,8 +376,10 @@ const Olympiad = observer(function Olympiad() {
             <QuizQuestion
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
               correctAnswerId="3"
-              onCorrect={handleCorrectAnswer}
-              onWrong={handleIncorrectAnswer}
+              onCorrect={() => setIsQuizCompleted(true)}
+              onWrong={() => {
+                setIsQuizWrong(true);
+              }}
               options={quizQuestions}
             >
               {isQuizCompleted && (

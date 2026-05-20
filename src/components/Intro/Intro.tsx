@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { rootStore } from '../../stores/rootStore';
@@ -64,22 +64,17 @@ const Intro = observer(function Intro() {
     });
   };
 
-  useEffect(() => {
-    if (step >= 2 && step <= 4) {
-      const timer = setTimeout(() => {
-        setStep((prev) => prev + 1);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [step]);
+  const nextStep = () => {
+    setStep((prev) => prev + 1);
+  };
 
   return (
     <div className="h-full min-h-screen bg-[url('assets/images/introMap.png')] bg-cover bg-center">
       {step === 1 && (
         <div className="max-w-277.5 mx-auto text-center py-22.5">
           <h1 className="font-semibold text-[120px] leading-33 text-[#0f0f33] mb-3">
-            Город <br /> содружества
+            Город <br />
+            содружества
           </h1>
 
           <p className="font-semibold text-[56px] leading-16 text-[#646872] mb-115.5">
@@ -97,10 +92,16 @@ const Intro = observer(function Intro() {
       )}
 
       {(step === 2 || step === 3 || step === 4) && (
-        <div className="pt-18 max-w-445.5 mx-auto">
+        <div className="pt-18 max-w-445.5 mx-auto cursor-pointer h-screen" onClick={nextStep}>
           <h1 className="font-semibold text-[80px] leading-22 text-[#0F0F33] text-center mb-4">
             Добро пожаловать в Город содружества
           </h1>
+
+          {step === 2 && (
+            <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
+              Нажмите в любое место, чтобы продолжить
+            </p>
+          )}
 
           {step === 3 && (
             <p className="font-medium text-[42px] leading-12.5 text-[#646872] text-center">
@@ -134,7 +135,12 @@ const Intro = observer(function Intro() {
                 key={role.key}
                 type="button"
                 onClick={() => handleSelectRole(role.key)}
-                className={`overflow-hidden rounded-4xl flex flex-col items-center pt-9.5 transition hover:scale-[1.02] backdrop-blur-[60px] ${rootStore.role === role.key ? 'bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%),linear-gradient(0deg,#C7470F,#C7470F)]' : 'bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%)]'}`}
+                className={`overflow-hidden rounded-4xl flex flex-col items-center pt-9.5 transition hover:scale-[1.02] backdrop-blur-[60px]
+                  ${
+                    rootStore.role === role.key
+                      ? 'bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%),linear-gradient(0deg,#C7470F,#C7470F)]'
+                      : 'bg-[linear-gradient(180deg,rgba(50,41,34,0.5)_0%,rgba(179,155,137,0.5)_100%)]'
+                  }`}
               >
                 <span className="font-semibold text-[36px] leading-11 text-[#FFFFFF80]">
                   {role.title}

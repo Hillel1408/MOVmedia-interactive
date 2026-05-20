@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, type ReactNode } from 'react';
 
 interface QuizOption {
   id: string;
@@ -14,7 +14,6 @@ interface QuizQuestionProps {
   children?: ReactNode;
   onCorrect?: () => void;
   onWrong?: () => void;
-  resetDelay?: number;
 }
 
 export default function QuizQuestion({
@@ -24,32 +23,23 @@ export default function QuizQuestion({
   onCorrect,
   onWrong,
   children,
-  resetDelay = 3000,
 }: QuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const handleAnswerClick = (id: string) => {
-    if (selectedAnswer) return;
-
     setSelectedAnswer(id);
 
     if (id === correctAnswerId) {
       onCorrect?.();
     } else {
       onWrong?.();
-
-      setTimeout(() => {
-        setSelectedAnswer(null);
-      }, resetDelay);
     }
   };
 
   return (
     <div className="rounded-3xl p-6 bg-[#F7EBE2] backdrop-blur-[60px]">
       <div className="flex flex-col gap-4 mb-6">
-        <p className="font-semibold text-[24px] leading-[115%] text-[#131418]">
-          {question}
-        </p>
+        <p className="font-semibold text-[24px] leading-[115%] text-[#131418]">{question}</p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -67,9 +57,9 @@ export default function QuizQuestion({
                 ${
                   isSelected
                     ? isCorrect
-                      ? "border-green-500"
-                      : "border-red-500"
-                    : "border-transparent"
+                      ? 'border-green-500'
+                      : 'border-red-500'
+                    : 'border-transparent'
                 }
               `}
             >
