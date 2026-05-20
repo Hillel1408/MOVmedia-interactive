@@ -1,8 +1,6 @@
-import { observer } from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
 
-import { ActionButton } from "../../components";
-
-import { map } from "../../assets/images";
+import { map, olympicCenterMap, academyMap, globalAreaMap } from '../../assets/images';
 
 interface MapProps {
   buttonText?: string;
@@ -11,17 +9,30 @@ interface MapProps {
 
 const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
   return (
-    <div className="relative h-full">
-      <img src={map} alt="Карты" className="w-full object-cover h-full" />
-
-      {buttonText && onButtonClick && (
-        <ActionButton
-          onClick={onButtonClick}
-          className="absolute top-10 left-1/2 -translate-x-1/2"
+    <div className="relative">
+      <img src={map} alt="Карты" className="w-full object-cover" />
+      <div>
+        <button
+          className="absolute top-[25.5%] right-[2%]"
+          onClick={() => buttonText === 'Олимпиадный центр' && onButtonClick?.()}
         >
-          {buttonText}
-        </ActionButton>
-      )}
+          <img src={olympicCenterMap} alt="Олимпиадный центр" />
+        </button>
+      </div>
+
+      <button
+        className="absolute top-[17%] right-[27%]"
+        onClick={() => buttonText === 'Академия' && onButtonClick?.()}
+      >
+        <img src={academyMap} alt="Академия" />
+      </button>
+
+      <button
+        className="absolute top-[30%] right-[38%]"
+        onClick={() => buttonText === 'Глобальная площадь' && onButtonClick?.()}
+      >
+        <img src={globalAreaMap} alt="Глобальная площадь" />
+      </button>
     </div>
   );
 });
