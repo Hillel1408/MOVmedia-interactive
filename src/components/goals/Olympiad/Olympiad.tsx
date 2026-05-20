@@ -24,7 +24,6 @@ import {
   qrCode,
   schoolboy5,
   map2,
-  map3,
   globalArea2,
   schoolboy6,
 } from '../../../assets/images';
