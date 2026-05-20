@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { Map, Modal, InfoCard, ActionButton, QuizQuestion } from '../../../components';
 
 import { rootStore } from '../../../stores/rootStore';
-import { quizQuestions } from '../../../constans/quizQuestions';
+import { quizQuestions } from '../../../constans';
 
 import {
   schoolboy3,
@@ -39,16 +39,6 @@ const Security = observer(function Security() {
       setStep(9);
     }
   };
-
-  useEffect(() => {
-    if (step !== 3) return;
-
-    const timer = setTimeout(() => {
-      setStep(4);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [step]);
 
   const mapStepConfig: Record<
     number,

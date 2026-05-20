@@ -12,7 +12,7 @@ import {
 } from '../../../components';
 
 import { rootStore } from '../../../stores/rootStore';
-import { quizQuestions } from '../../../constans/quizQuestions';
+import { quizQuestions, olympiadSequenceItems } from '../../../constans/';
 
 import {
   schoolboy3,
@@ -27,7 +27,6 @@ import {
   globalArea2,
   schoolboy6,
 } from '../../../assets/images';
-import { hat, star, clipboardList, university } from '../../../assets/icons';
 
 const Olympiad = observer(function Olympiad() {
   const [step, setStep] = useState(1);
@@ -126,32 +125,7 @@ const Olympiad = observer(function Olympiad() {
             <CardSequence
               onSuccess={() => setIsSequenceCompleted(true)}
               correctOrder={['clipboardList', 'star', 'hat', 'university']}
-              items={[
-                {
-                  id: 'hat',
-                  icon: hat,
-                  iconBg: '#DDEDF9',
-                  title: 'Записаться на курс',
-                },
-                {
-                  id: 'clipboardList',
-                  icon: clipboardList,
-                  iconBg: '#E0E6FB',
-                  title: 'Пройти тест',
-                },
-                {
-                  id: 'university',
-                  icon: university,
-                  iconBg: '#F46248',
-                  title: 'Получить преимущества при поступлении в лучшие ВУЗы',
-                },
-                {
-                  id: 'star',
-                  icon: star,
-                  iconBg: '#FEEBBF',
-                  title: 'Получить рекомендации',
-                },
-              ]}
+              items={olympiadSequenceItems}
             />
           </InfoCard>
         </div>
