@@ -1,12 +1,12 @@
-import TeaserCorrect from '@/components/teaser/TeaserCorrect/TeaserCorrect';
+// import TeaserCorrect from '@/components/teaser/TeaserCorrect/TeaserCorrect';
 import TeaserFinal from '@/components/teaser/TeaserFinal/TeaserFinal';
-import TeaserGoal from '@/components/teaser/TeaserGoal/TeaserGoal';
-import TeaserIncorrect from '@/components/teaser/TeaserIncorrect/TeaserIncorrect';
-import TeaserIntro from '@/components/teaser/TeaserIntro/TeaserIntro';
-import TeaserQuestion from '@/components/teaser/TeaserQuestion/TeaserQuestion';
-import TeaserRole from '@/components/teaser/TeaserRole/TeaserRole';
-import TeaserRoute from '@/components/teaser/TeaserRoute/TeaserRoute';
-import TeaserStart from '@/components/teaser/TeaserStart/TeaserStart';
+// import TeaserGoal from '@/components/teaser/TeaserGoal/TeaserGoal';
+// import TeaserIncorrect from '@/components/teaser/TeaserIncorrect/TeaserIncorrect';
+// import TeaserIntro from '@/components/teaser/TeaserIntro/TeaserIntro';
+// import TeaserQuestion from '@/components/teaser/TeaserQuestion/TeaserQuestion';
+// import TeaserRole from '@/components/teaser/TeaserRole/TeaserRole';
+// import TeaserRoute from '@/components/teaser/TeaserRoute/TeaserRoute';
+// import TeaserStart from '@/components/teaser/TeaserStart/TeaserStart';
 
 const Teaser = () => {
   return (

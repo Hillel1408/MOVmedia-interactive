@@ -13,7 +13,7 @@ const Map = observer(function Map({ buttonText, onButtonClick }: MapProps) {
       <img src={map} alt="Карты" className="w-full object-cover" />
       <div>
         <button
-          className="absolute top-[25.5%] right-[2%]"
+          className="absolute top-[26%] right-[2.5%]"
           onClick={() => buttonText === 'Олимпиадный центр' && onButtonClick?.()}
         >
           <img src={olympicCenterMap} alt="Олимпиадный центр" />
