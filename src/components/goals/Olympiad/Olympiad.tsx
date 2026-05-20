@@ -324,11 +324,12 @@ const Olympiad = observer(function Olympiad() {
           )}
 
           {isQuizWrong && !isQuizCompleted && (
-            <div className="absolute bottom-0">
-              <img src={schoolboy6} width={524} height={549} alt="Школьник" />
-
-              <div className="text-[24px] leading-[115%] text-white w-63.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-20 left-14">
-                Давай ещё раз
+            <div>
+              <div className="absolute bottom-0">
+                <img src={schoolboy6} width={524} height={549} alt="Школьник" />
+                <div className="text-[24px] leading-[115%] text-white w-63.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-20 left-14">
+                  Давай ещё раз
+                </div>
               </div>
             </div>
           )}
