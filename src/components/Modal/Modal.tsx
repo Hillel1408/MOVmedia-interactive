@@ -1,4 +1,5 @@
-import { type ReactNode, useEffect } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 type ModalProps = {
   isOpen: boolean;
@@ -6,23 +7,32 @@ type ModalProps = {
 };
 
 export default function Modal({ isOpen, children }: ModalProps) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    const timer = window.setTimeout(() => setMounted(true), 0);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 overflow-x-auto overflow-y-auto">
-      <div className="min-w-480 my-auto h-full">{children}</div>
-    </div>
+      <div className="min-w-480 h-full">{children}</div>
+    </div>,
+    document.body
   );
 }

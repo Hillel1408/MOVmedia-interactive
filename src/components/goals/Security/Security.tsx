@@ -150,7 +150,7 @@ const Security = observer(function Security() {
               </div>
             </div>
           ) : isQuizWrong ? (
-            <div className="relative">
+            <div>
               <div className="absolute bottom-0">
                 <img
                   src={schoolboy5}

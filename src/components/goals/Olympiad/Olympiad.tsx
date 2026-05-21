@@ -28,7 +28,7 @@ import {
 } from '../../../assets/images';
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(5);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
@@ -149,15 +149,9 @@ const Olympiad = observer(function Olympiad() {
               </div>
             </div>
           ) : isQuizWrong ? (
-            <div className="relative">
+            <div>
               <div className="absolute bottom-0">
-                <img
-                  src={schoolboy5}
-                  width={506}
-                  height={540}
-                  alt="Школьник"
-                  className="min-w-126.5"
-                />
+                <img src={schoolboy5} width={506} height={540} alt="Школьник" />
                 <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-45 left-7.75">
                   Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна практика. Давай ещё
                   раз?
