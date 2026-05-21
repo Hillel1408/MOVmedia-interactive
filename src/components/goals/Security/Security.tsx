@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { Map, Modal, InfoCard, ActionButton, QuizQuestion } from '../../../components';
+import {
+  Map,
+  Modal,
+  InfoCard,
+  ActionButton,
+  QuizQuestion,
+  QuizCharacter,
+} from '../../../components';
 
 import { rootStore } from '../../../stores/rootStore';
 import { quizQuestions } from '../../../constans';
@@ -12,11 +19,9 @@ import {
   аcademy,
   schoolboy4,
   globalArea,
-  schoolboy5,
   globalArea2,
   qrCode,
   map2,
-  map3,
   schoolboy6,
 } from '../../../assets/images';
 
@@ -34,7 +39,7 @@ const Security = observer(function Security() {
       setStep(4);
     }
 
-    if (step === 7 && isQuizWrong) {
+    if (step === 7 && isQuizWrong && !isQuizCompleted) {
       setStep(9);
     }
   };
@@ -143,38 +148,7 @@ const Security = observer(function Security() {
 
       <Modal isOpen={step === 7}>
         <div className="grid grid-cols-[391px_1fr] items-end h-full relative">
-          {isQuizCompleted ? (
-            <div className="relative">
-              <img src={schoolboy4} width={391} height={560} alt="Школьник" />
-              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-35 left-7.75">
-                В точку! Я бы так же ответил» Готов двигаться дальше?
-              </div>
-            </div>
-          ) : isQuizWrong ? (
-            <div>
-              <div className="absolute bottom-0">
-                <img
-                  src={schoolboy5}
-                  width={506}
-                  height={540}
-                  alt="Школьник"
-                  className="min-w-126.5"
-                />
-                <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-45 left-7.75">
-                  Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна практика. Давай ещё
-                  раз?
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="relative">
-              <img src={schoolboy} width={438} height={580} alt="Школьник" />
-              <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-75 left-7.75">
-                Победители нашей Олимпиады по финансовой безопасности получают баллы к ЕГЭ и шанс
-                поступить в крутые вузы. Хочешь проверить, на что способен?
-              </div>
-            </div>
-          )}
+          <QuizCharacter isQuizCompleted={isQuizCompleted} isQuizWrong={isQuizWrong} />
 
           <InfoCard title="Академия" backgroundImage={аcademy} className="grid-cols-[1fr_492px]">
             <div>
@@ -230,11 +204,7 @@ const Security = observer(function Security() {
 
       <Modal isOpen={step === 9}>
         <div className="relative grid grid-cols-[391px_548px] items-end justify-between h-full bg-[#f7eae1]">
-          <img
-            src={isQuizCompleted ? map2 : map3}
-            alt="Карта"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <img src={map2} alt="Карта" className="absolute inset-0 w-full h-full object-cover" />
 
           {isQuizCompleted && (
             <div className="relative">
