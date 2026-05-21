@@ -74,8 +74,11 @@ const Olympiad = observer(function Olympiad() {
     });
   };
 
-  const handleFinal = (step: number) => {
-    setStep(step);
+  const handleFinal = () => {
+    setStep(1);
+    rootStore.setRole(null);
+    rootStore.finishIntro(false);
+    rootStore.setGoal(null);
     send('teaser', {
       screen: 'final',
     });
@@ -307,15 +310,7 @@ const Olympiad = observer(function Olympiad() {
                 Сканируй <br /> меня
               </span>
             </div>
-            <ActionButton
-              onClick={() => {
-                setStep(1);
-                rootStore.setRole(null);
-                rootStore.finishIntro(false);
-                rootStore.setGoal(null);
-              }}
-              className="mt-5"
-            >
+            <ActionButton onClick={handleFinal} className="mt-5">
               Вернуться в начало
             </ActionButton>
           </div>
