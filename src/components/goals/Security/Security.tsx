@@ -111,6 +111,7 @@ const Security = observer(function Security() {
               </div>
             )}
           </div>
+
           <InfoCard
             title="Глобальная площадь"
             backgroundImage={step === 5 ? globalArea2 : globalArea}
