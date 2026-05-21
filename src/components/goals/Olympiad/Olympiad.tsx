@@ -26,25 +26,59 @@ import {
   globalArea2,
   schoolboy6,
 } from '../../../assets/images';
+import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
 
 const Olympiad = observer(function Olympiad() {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [isSequenceCompleted, setIsSequenceCompleted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
+  const { send } = useBroadcastChannel('app-channel');
+
   const handleNextStep = () => {
     if (step === 1) {
       setStep(2);
+      send('teaser', {
+        screen: 'route',
+      });
     }
 
-    if (step === 5 && isQuizWrong) {
+    if (step === 5 && isQuizWrong && !isQuizCompleted) {
       setStep(11);
     }
 
     if (step === 7) {
       setStep(8);
     }
+  };
+
+  const handleMapClick = (step: number) => {
+    setStep(step);
+    send('teaser', {
+      screen: 'question',
+    });
+  };
+
+  const handleCorrectAnswer = () => {
+    setIsQuizCompleted(true);
+    send('teaser', {
+      screen: 'correct',
+    });
+  };
+
+  const handleIncorrectAnswer = () => {
+    setIsQuizWrong(true);
+    send('teaser', {
+      screen: 'incorrect',
+    });
+  };
+
+  const handleFinal = (step: number) => {
+    setStep(step);
+    send('teaser', {
+      screen: 'final',
+    });
   };
 
   const mapStepConfig: Record<
@@ -56,15 +90,15 @@ const Olympiad = observer(function Olympiad() {
   > = {
     2: {
       buttonText: 'Олимпиадный центр',
-      onClick: () => setStep(3),
+      onClick: () => handleMapClick(3),
     },
     4: {
       buttonText: 'Академия',
-      onClick: () => setStep(5),
+      onClick: () => handleMapClick(5),
     },
     6: {
       buttonText: 'Глобальная площадь',
-      onClick: () => setStep(7),
+      onClick: () => handleMapClick(7),
     },
   };
 
@@ -124,6 +158,16 @@ const Olympiad = observer(function Olympiad() {
             <CardSequence
               onSuccess={() => setIsSequenceCompleted(true)}
               correctOrder={['clipboardList', 'star', 'hat', 'university']}
+              onCorrect={() =>
+                send('teaser', {
+                  screen: 'correct',
+                })
+              }
+              onWrong={() =>
+                send('teaser', {
+                  screen: 'incorrect',
+                })
+              }
               items={olympiadSequenceItems}
             />
           </InfoCard>
@@ -149,9 +193,15 @@ const Olympiad = observer(function Olympiad() {
               </div>
             </div>
           ) : isQuizWrong ? (
-            <div>
+            <div className="relative">
               <div className="absolute bottom-0">
-                <img src={schoolboy5} width={506} height={540} alt="Школьник" />
+                <img
+                  src={schoolboy5}
+                  width={506}
+                  height={540}
+                  alt="Школьник"
+                  className="min-w-126.5"
+                />
                 <div className="text-[24px] leading-[115%] text-white w-85.5 py-6.25 px-10 bg-[#32292280] rounded-4xl backdrop-blur-[60px] absolute -top-45 left-7.75">
                   Было бы так просто — я бы уже чемпионом стал. Нет, здесь нужна практика. Давай ещё
                   раз?
@@ -179,11 +229,9 @@ const Olympiad = observer(function Olympiad() {
             <QuizQuestion
               question="Тебе приходит сообщение: «Оплати доступ к олимпиадному заданию — получи бонус. Пришли код из СМС для подтверждения». Твои действия?"
               correctAnswerId="3"
-              onCorrect={() => setIsQuizCompleted(true)}
+              onCorrect={handleCorrectAnswer}
+              onWrong={handleIncorrectAnswer}
               singleAttempt
-              onWrong={() => {
-                setIsQuizWrong(true);
-              }}
               options={quizQuestions}
             />
           </InfoCard>

@@ -2,9 +2,18 @@ import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { rootStore } from '../../stores/rootStore';
-import { schoolboy, student, expert, teacher } from '../../assets/images';
 
-const roles = [
+import { schoolboy, student, expert, teacher } from '../../assets/images';
+import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
+
+type TRole = {
+    key: 'schoolboy' | 'student' | 'expert' | 'teacher';
+    title: string;
+    name: string;
+    image: string;
+}
+
+const roles: TRole[] = [
   {
     key: 'schoolboy',
     title: 'Школьник',
@@ -34,12 +43,25 @@ const roles = [
 const Intro = observer(function Intro() {
   const [step, setStep] = useState(1);
 
-  const handleSelectRole = (role: string) => {
+  const { send } = useBroadcastChannel('app-channel');
+
+  const handleSelectRole = (role: TRole['key']) => {
     rootStore.setRole(role);
+    send('teaser', {
+      screen: 'role',
+      role,
+    });
 
     setTimeout(() => {
       rootStore.finishIntro(true);
     }, 2000);
+  };
+
+  const handleStart = () => {
+    setStep(2);
+    send('teaser', {
+      screen: 'start',
+    });
   };
 
   const nextStep = () => {
@@ -62,7 +84,7 @@ const Intro = observer(function Intro() {
           <button
             type="button"
             className="h-24 mx-auto flex items-center justify-center w-95.75 bg-[#EA5614] shadow-[0px_18px_40px_0px_#32292299] rounded-3xl font-semibold text-[40px] leading-12 text-white"
-            onClick={() => setStep(2)}
+            onClick={handleStart}
           >
             Начать
           </button>

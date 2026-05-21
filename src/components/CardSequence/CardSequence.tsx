@@ -19,12 +19,16 @@ type Props = {
   items: Item[];
   correctOrder: string[];
   onSuccess?: () => void;
+  onCorrect?: () => void;
+  onWrong?: () => void;
 };
 
 export default function CardSequence({
   items,
   correctOrder,
   onSuccess,
+  onCorrect,
+  onWrong,
 }: Props) {
   const [pool, setPool] = useState<Item[]>(() => items);
 
@@ -69,6 +73,12 @@ export default function CardSequence({
 
     setPool(newPool);
     setSlots(newSlots);
+
+    if(isCorrectPlacement){
+      onCorrect?.()
+    }else{
+      onWrong?.()
+    }
 
     if (!isCorrectPlacement) {
       setWrong((prev) => ({
