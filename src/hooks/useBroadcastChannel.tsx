@@ -39,6 +39,7 @@ export const useBroadcastChannel = (channelName: string) => {
 
   // Проверяем жив ли канал
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setupChannel();
 
     const pingInterval = setInterval(() => {
@@ -54,6 +55,7 @@ export const useBroadcastChannel = (channelName: string) => {
           senderId: senderIdRef.current,
           timestamp: Date.now(),
         });
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         setupChannel();
       }

@@ -15,7 +15,7 @@ import { quizQuestions } from '../../../constans';
 import { schoolboy3, аcademy, schoolboy, globalArea, globalArea2 } from '../../../assets/images';
 
 const Movement = observer(function Movement() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [isQuizWrong, setIsQuizWrong] = useState(false);
 
@@ -156,6 +156,15 @@ const Movement = observer(function Movement() {
           </InfoCard>
         </div>
       </Modal>
+
+      {step === 8 && (
+        <div className="absolute left-0 bottom-0">
+          <img src={schoolboy} width={438} height={580} alt="Школьник" className="relative z-10" />
+          <div className="text-[24px] leading-[115%] text-white w-79.75 py-6.25 px-10 absolute bg-[#32292280] rounded-4xl backdrop-blur-[60px] bottom-135.25 left-46.25">
+            Жми на следующую локацию
+          </div>
+        </div>
+      )}
     </div>
   );
 });
