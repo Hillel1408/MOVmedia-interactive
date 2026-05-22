@@ -5,6 +5,7 @@ import { rootStore } from '../../stores/rootStore';
 
 import { schoolboy, student, expert, teacher } from '../../assets/images';
 import { useBroadcastChannel } from '@/hooks/useBroadcastChannel';
+import { Link } from 'react-router-dom';
 
 type TRole = {
     key: 'schoolboy' | 'student' | 'expert' | 'teacher';
@@ -156,6 +157,7 @@ const Intro = observer(function Intro() {
           </div>
         </div>
       )}
+      <Link to="/teaser" className='fixed bottom-0 right-0 bg-amber-50 p-1'>Teaser</Link>
     </div>
   );
 });
